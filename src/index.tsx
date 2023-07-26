@@ -1,19 +1,47 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createRoot } from "react-dom/client";
+import {
+    createBrowserRouter,
+    RouterProvider,
+    Route,
+    Link,
+} from "react-router-dom";
+import LoginPage from "./pages/login_page";
+import DocumentsPage from "./pages/documents_pages";
+import EditDocumentPage from "./pages/edit_document_page";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+const router = createBrowserRouter([
+    /**
+     * 동의서를 목록
+     * */
+    {
+        path: "/",
+        element: <DocumentsPage/>,
+    },
+    /**
+     * 관리자 로그인 페이지
+     * */
+    {
+        path: "/login",
+        element: <LoginPage/>,
+    },
+    /**
+     * 동의서를 템플릿을 생성하는 페이지
+     * */
+    {
+        path: "/edit",
+        element: <EditDocumentPage/>,
+    },
+    /**
+     * 동의서를 제출하는 페이지
+     * */
+    {
+        path: "/submit",
+        element: <EditDocumentPage/>,
+    },
+]);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+createRoot(document.getElementById("root") as HTMLElement).render(
+    <RouterProvider router={router} />
+);
