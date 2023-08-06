@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import OrgTreeComponent, { useTree } from "react-drag-hierarchy-tree";
+import OrgTreeComponent, { useTree as tree } from "react-drag-hierarchy-tree";
 
 const data = {
   id: 1,
@@ -33,7 +33,7 @@ const data = {
 };
 
 export default function documents() {
-  const { treeRef } = useTree();
+  const { treeRef } = tree();
 
   const onClick = () => {
     treeRef.current?.onExpandNodes();
