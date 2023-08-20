@@ -32,7 +32,7 @@ const data = {
   ],
 };
 
-export default function documents() {
+export default function Documents() {
   const { treeRef } = useTree();
 
   const onClick = () => {

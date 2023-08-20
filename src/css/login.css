@@ -1,0 +1,44 @@
+.logo {
+  display: flex;
+  justify-content: center;
+  margin-top: 149px;
+}
+.logo img {
+  width: 149px;
+  height: 149px;
+}
+.idInput {
+  display: flex;
+  justify-content: center;
+}
+.idInput input {
+  margin-top: 64.48px;
+  width: 583px;
+  height: 60px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px;
+  border-color: none;
+}
+.pwdInput {
+  display: flex;
+  justify-content: center;
+}
+.pwdInput input {
+  margin-top: 42px;
+  width: 583px;
+  height: 60px;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px;
+  border-color: none;
+}
+.etc {
+  display: flex;
+}
+.etc input {
+  margin-top: 19px;
+  justify-content: left;
+}
