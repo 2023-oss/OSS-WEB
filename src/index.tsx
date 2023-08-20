@@ -1,5 +1,5 @@
 import React from "react";
-import "./index.css";
+import "./css/index.css";
 import "react-checkbox-tree/lib/react-checkbox-tree.css";
 import { createRoot } from "react-dom/client";
 import {
