@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import initialData from "../initial-data";
-import DragDropExample from "../components/DragDropExample";
+import initialData from "../data/initial-data";
+import DragDropExample from "./DragDrop";
 
 export type BlockStatus = "boxes" | "customblocks";
 
