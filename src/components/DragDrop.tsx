@@ -9,8 +9,6 @@ import {
   DropResult,
 } from "react-beautiful-dnd";
 import { Block, BlockStatus, Blocks } from "./CustomBlocks";
-import { BlockList } from "net";
-import { moveEmitHelpers } from "typescript";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -33,7 +31,7 @@ export default function DragDropExample({
 }) {
   const [enabled, setEnabled] = useState(false);
   // 선택된 블록들을 저장할 상태 배열
-
+  const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) {
       return;
@@ -62,6 +60,8 @@ export default function DragDropExample({
 
       console.log("after : ", newBlocks);
       setBlocks(newBlocks);
+      setSelectedBlocks(newBlocks["customblocks"]);
+      console.log("selected blocks", selectedBlocks);
     }
   };
 
@@ -110,22 +110,12 @@ export default function DragDropExample({
     const baseClassName =
       "rounded-lg bg-white p-4 transition-shadow dark:bg-[#121212]";
 
-    if (snapshot.isDragging) {
-      if (category === "personal-info") {
-        return `${baseClassName} bg-opacity-90 shadow-2xl shadow-gray-400 bg-blue-300`;
-      } else if (category === "safety") {
-        return `${baseClassName} bg-opacity-90 shadow-2xl shadow-gray-400 bg-green-200`;
-      } else {
-        return `${baseClassName} bg-opacity-90 shadow-2xl shadow-gray-400`;
-      }
+    if (category === "personal-info") {
+      return `${baseClassName} shadow bg-blue-200`;
+    } else if (category === "safety") {
+      return `${baseClassName} shadow bg-green-300`;
     } else {
-      if (category === "personal-info") {
-        return `${baseClassName} shadow bg-blue-300`;
-      } else if (category === "safety") {
-        return `${baseClassName} shadow bg-green-200`;
-      } else {
-        return `${baseClassName} shadow`;
-      }
+      return `${baseClassName} shadow`;
     }
   }
 
