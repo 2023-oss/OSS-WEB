@@ -1,8 +1,20 @@
-import "../css/login.css";
-import styled from "styled-components";
+import { styled } from "styled-components";
 
 export default function LoginPage() {
+  const StyledButton = styled.div`
+    background-color: #ffa0a0;
+    width: 100%;
+    color: white;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 35px 0px;
+    border-radius: 10px;
+    box-shadow: 6px 6px 4px rgb(0, 0, 0, 0.25);
+  `;
   const StyledLogin = styled.div`
+    width: 583px;
+    margin: 0 auto;
     .logo {
       display: flex;
       justify-content: center;
@@ -12,50 +24,39 @@ export default function LoginPage() {
       width: 149px;
       height: 149px;
     }
-    .idInput {
+    .input-box {
       display: flex;
       justify-content: center;
     }
-    .idInput input {
-      margin-top: 64.48px;
-      width: 583px;
-      height: 60px;
-      font-size: 18px;
-      padding: 10px;
-      border-radius: 15px;
-      box-shadow: 2px 2px 2px 2px gray;
-      border-color: none;
-    }
-    .pwdInput {
-      display: flex;
-      justify-content: center;
-    }
-    .pwdInput input {
+    .input-box input {
       margin-top: 42px;
-      width: 583px;
-      height: 60px;
-      font-size: 18px;
-      padding: 10px;
+      /* height: 60px; */
+      width: 100%;
+      font-size: 24px;
+      outline: none;
+      border: 1px solid black;
+      padding: 27px 22px;
       border-radius: 15px;
-      box-shadow: 2px 2px 2px 2px gray;
+      box-shadow: 6px 6px 4px rgb(0, 0, 0, 0.25);
       border-color: none;
     }
     .etc {
       display: flex;
+      align-items: center;
+      margin-top: 19px;
+      font-size: 20px;
+      margin-bottom: 29px;
     }
     .etc input {
-      margin-top: 19px;
-      justify-content: left;
+      margin-right: 1rem;
     }
-    button {
-      border: none;
-      width: 583px;
-      height: 108px;
-      background-color: #ffa0a0;
-    }
-    .btnDiv {
+    .bottom-section {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      font-size: 20px;
+      color: rgb(0, 0, 0, 0.5);
+      font-weight: 500;
+      margin-top: 20px;
     }
   `;
   return (

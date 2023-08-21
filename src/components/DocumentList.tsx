@@ -55,7 +55,7 @@ export default function DocumentList() {
     <Wrapper>
       <StyledDocumentList>
         <div className={"date-box"}>
-          <span>{now}</span>
+          <span></span>
           <button onClick={openCal}>
             {calbtn && <MyCalendar></MyCalendar>}
             <img src={"/icon/calender.svg"} alt={"calender"} />
