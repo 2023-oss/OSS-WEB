@@ -10,6 +10,7 @@ import {
 } from "react-beautiful-dnd";
 import { Block, BlockStatus, Blocks } from "./CustomBlocks";
 import { BlockList } from "net";
+import { moveEmitHelpers } from "typescript";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -32,28 +33,62 @@ export default function DragDropExample({
 }) {
   const [enabled, setEnabled] = useState(false);
   // 선택된 블록들을 저장할 상태 배열
-  const [selectedBlocks, setSelectedBlocks] = useState<Blocks | null>(null);
 
-  const onDragEnd = ({ source, destination }: DropResult) => {
-    if (!destination) return;
+  const handleDragEnd = ({ source, destination }: DropResult) => {
+    if (!destination) {
+      return;
+    }
 
     const sourceKey = source.droppableId as BlockStatus;
     const destinationKey = destination.droppableId as BlockStatus;
 
-    if (destinationKey === sourceKey && destination.index === source.index) {
-      console.log("they're equal");
-      return;
+    if (sourceKey === destinationKey) {
+      return; // 같은 droppable 내에서의 이동은 무시
     }
-    const _items = JSON.parse(JSON.stringify(blocks)) as typeof blocks;
-    const [targetItem] = _items[sourceKey].splice(source.index, 1);
-    _items[destinationKey].splice(destination.index, 0, targetItem);
-    setBlocks(_items);
+    // 서로 다른 droppable 간의 이동은 복사
+    else {
+      // 이동시키기 전
+      const newBlocks = { ...blocks };
+      console.log("before : ", newBlocks);
 
-    // 선택된 블록들을 업데이트
-    const selected = _items.customblocks;
-    console.log(selected);
-    //setSelectedBlocks((selectedBlocks:Blocks, selected:Blocks)=>[...selectedBlocks, selected]);
+      // 이동하는 Block 객체 찾기
+      const movedBlock = { ...blocks[sourceKey][source.index] };
+      console.log(movedBlock);
+      // movedBlock의 id를 변경해 복사
+      const copiedBlock = { ...movedBlock, id: `block-${Date.now()}` };
+      // Blocks에 copiedBlock 저장
+      newBlocks[destinationKey].splice(destination.index, 0, copiedBlock);
+      //splice(start: number - 시작 인덱스, deleteCount: number -삭제할 요소의 수, ...items: T[] - 추가될 요소): T[];
+
+      console.log("after : ", newBlocks);
+      setBlocks(newBlocks);
+    }
   };
+
+  // const onDragEnd = ({ source, destination }: DropResult) => {
+  //   // DropResult{droppableId:BlockStatus;index:num;}
+  //   // console.log("source", source); // 출발
+  //   // console.log("destination", destination); // 도착
+
+  //   if (!destination) return;
+
+  //   const sourceKey = source.droppableId as BlockStatus;
+  //   const destinationKey = destination.droppableId as BlockStatus;
+
+  //   if (destinationKey === sourceKey && destination.index === source.index) {
+  //     console.log("they're equal");
+  //     return;
+  //   }
+  //   const _items = JSON.parse(JSON.stringify(blocks)) as typeof blocks;
+  //   const [targetItem] = _items[sourceKey].splice(source.index, 1);
+  //   _items[destinationKey].splice(destination.index, 0, targetItem);
+  //   setBlocks(_items);
+
+  //   // 선택된 블록들을 업데이트
+  //   const selected = _items.customblocks;
+  //   console.log(selected);
+  //   //setSelectedBlocks();
+  // };
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
@@ -102,7 +137,7 @@ export default function DragDropExample({
       </div> */}
 
       <div className="mt-4 flex">
-        <DragDropContext onDragEnd={onDragEnd}>
+        <DragDropContext onDragEnd={handleDragEnd}>
           <div className="grid flex-1 select-none grid-cols-3 gap-4 rounded-lg">
             {Object.keys(blocks).map((key) => (
               <Droppable key={key} droppableId={key}>
