@@ -43,6 +43,18 @@ export default function DragDropExample({
     if (sourceKey === destinationKey) {
       return; // 같은 droppable 내에서의 이동은 무시
     }
+    // customblocks=>boxes 이동 시 삭제
+    else if (sourceKey === "customblocks") {
+      const newBlocks = { ...blocks };
+      // 이동하는 Block 객체 찾기
+      const movedBlock = { ...blocks[sourceKey][source.index] };
+      console.log(movedBlock);
+      // Blocks에 copiedBlock 삭제
+      newBlocks[sourceKey].splice(source.index, 1);
+      console.log(newBlocks);
+      setBlocks(newBlocks);
+      setSelectedBlocks(newBlocks["customblocks"]);
+    }
     // 서로 다른 droppable 간의 이동은 복사
     else {
       // 이동시키기 전
@@ -111,9 +123,9 @@ export default function DragDropExample({
       "rounded-lg bg-white p-4 transition-shadow dark:bg-[#121212]";
 
     if (category === "personal-info") {
-      return `${baseClassName} shadow bg-blue-200`;
+      return `${baseClassName} shadow bg-blue-300`;
     } else if (category === "safety") {
-      return `${baseClassName} shadow bg-green-300`;
+      return `${baseClassName} shadow bg-green-200`;
     } else {
       return `${baseClassName} shadow`;
     }
