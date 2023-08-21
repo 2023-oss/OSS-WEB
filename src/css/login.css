@@ -1,4 +1,4 @@
-.logo {
+/* .logo {
   display: flex;
   justify-content: center;
   margin-top: 149px;
@@ -18,7 +18,7 @@
   font-size: 18px;
   padding: 10px;
   border-radius: 15px;
-  box-shadow: 3px 3px 3px;
+  box-shadow: 2px 2px 2px 2px gray;
   border-color: none;
 }
 .pwdInput {
@@ -32,7 +32,7 @@
   font-size: 18px;
   padding: 10px;
   border-radius: 15px;
-  box-shadow: 3px 3px 3px;
+  box-shadow: 2px 2px 2px 2px gray;
   border-color: none;
 }
 .etc {
@@ -42,3 +42,13 @@
   margin-top: 19px;
   justify-content: left;
 }
+button {
+  border: none;
+  width: 583px;
+  height: 108px;
+  background-color: #ffa0a0;
+}
+.btnDiv {
+  display: flex;
+  justify-content: center;
+} */

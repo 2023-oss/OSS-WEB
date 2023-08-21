@@ -11,13 +11,14 @@ import {
 import LoginPage from "./pages/login_page";
 import DocumentsPage from "./pages/documents_pages";
 import EditDocumentPage from "./pages/edit_document_page";
+import SortablePage from "./pages/sortable";
 const router = createBrowserRouter([
   /**
    * 동의서를 목록
    * */
   {
     path: "/",
-    element: <DocumentsPage />,
+    element: <SortablePage />,
   },
   /**
    * 관리자 로그인 페이지
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/submit",
     element: <EditDocumentPage />,
+  },
+  {
+    path: "/sort",
+    element: <SortablePage />,
   },
 ]);
 

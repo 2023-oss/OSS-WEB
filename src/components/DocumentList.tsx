@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Wrapper from "./Wrapper";
 import { User, data } from "../data/userList";
+import MyCalendar from "./MyCalendar";
+import { useState } from "react";
+import dayjs from "dayjs";
 const StyledDocumentList = styled.div`
   .date-box {
     font-size: 2rem;
@@ -26,17 +29,37 @@ const StyledDocumentList = styled.div`
   td {
     text-align: center;
   }
+  button {
+    background-color: white;
+    border: none;
+  }
 `;
 
 export default function DocumentList() {
+  let now = dayjs();
+  now.format();
   const documents = [{}];
+  const [calbtn, isCalbtn] = useState(false);
+  const [clickCnt, setclickCnt] = useState(0);
+  const openCal = () => {
+    setclickCnt((prevCnt) => prevCnt + 1);
 
+    if (clickCnt % 2 === 0) {
+      isCalbtn(false);
+    } else {
+      isCalbtn(true);
+    }
+    console.log(clickCnt);
+  };
   return (
     <Wrapper>
       <StyledDocumentList>
         <div className={"date-box"}>
-          <span>2023년 7월 25일</span>
-          <img src={"/icon/calender.svg"} alt={"calender"} />
+          <span>{now}</span>
+          <button onClick={openCal}>
+            {calbtn && <MyCalendar></MyCalendar>}
+            <img src={"/icon/calender.svg"} alt={"calender"} />
+          </button>
         </div>
         <table>
           <tr>
