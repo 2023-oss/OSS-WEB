@@ -89,13 +89,14 @@ export default function LoginPage() {
         <div className={"input-box"}>
           <input type="text" placeholder="비밀번호"></input>
         </div>
-        <div className={"etc"}>
+        <div className={"bottom-section"}>
           <input type="checkbox"></input>
           자동 로그인
         </div>
 
         <div className={"btnDiv"}>
           <StyledButton>로그인</StyledButton>
+
         </div>
         <div className={"etc2"}>
           <Link to={"/join"}>
@@ -103,7 +104,7 @@ export default function LoginPage() {
           </Link>
           <Link to="/">
             <span>아이디 | 비밀번호 찾기</span>
-          </Link>
+            </Link>
         </div>
       </div>
     </StyledLogin>
