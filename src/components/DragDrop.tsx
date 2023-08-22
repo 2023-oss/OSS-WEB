@@ -13,6 +13,7 @@ import { Block, BlockStatus, Blocks } from "./CustomBlocks";
 import { Typography, Tabs, Tab, Box } from "@mui/material";
 import styled from "styled-components";
 import CategoryTabs from "./CategoryTabs";
+import tabPanels from "../data/tab-panels";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -188,7 +189,33 @@ export default function DragDropExample({
                       </span>
                       {key === "boxes" ? (
                         <>
-                          <TabPanel value={tabValue} index={0}>
+                          {tabPanels.map((tabPanel) => (
+                            <TabPanel value={tabValue} index={tabPanel.index}>
+                              {blocks[key as BlockStatus]
+                                .filter(
+                                  (item) =>
+                                    item.category === tabPanel.filterCategory
+                                )
+                                .map((item, index) => (
+                                  <Draggable
+                                    key={item.id}
+                                    draggableId={item.id}
+                                    index={index}
+                                  >
+                                    {(provided, snapshot) =>
+                                      renderDraggable(
+                                        provided,
+                                        snapshot,
+                                        item,
+                                        index
+                                      )
+                                    }
+                                  </Draggable>
+                                ))}
+                              {provided.placeholder}
+                            </TabPanel>
+                          ))}
+                          {/* <TabPanel value={tabValue} index={0}>
                             {blocks[key as BlockStatus]
                               .filter((item) => item.category === "default")
                               .map((item, index) => (
@@ -254,7 +281,7 @@ export default function DragDropExample({
                                 ))}
                               {provided.placeholder}
                             </>
-                          </TabPanel>
+                          </TabPanel> */}
                         </>
                       ) : (
                         <>
