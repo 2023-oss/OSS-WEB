@@ -71,7 +71,7 @@ export default function LoginPage() {
         <div className={"input-box"}>
           <input type="text" placeholder="비밀번호"></input>
         </div>
-        <div className={"etc"}>
+        <div className={"bottom-section"}>
           <input type="checkbox"></input>
           자동 로그인
         </div>
