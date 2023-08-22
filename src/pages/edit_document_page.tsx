@@ -7,7 +7,7 @@ export default function EditDocumentPage() {
     <>
       <Header active={1}></Header>
       {/* <DocumentList></DocumentList> */}
-      <CustomBlocks />
+      <DocumentList />
     </>
   );
 }
