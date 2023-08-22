@@ -65,10 +65,10 @@ export default function LoginPage() {
         <div className={"logo"}>
           <img src="icon\Logo.png"></img>
         </div>
-        <div className={"idInput"}>
+        <div className={"input-box"}>
           <input type="text" placeholder="아이디"></input>
         </div>
-        <div className={"pwdInput"}>
+        <div className={"input-box"}>
           <input type="text" placeholder="비밀번호"></input>
         </div>
         <div className={"etc"}>
@@ -76,7 +76,7 @@ export default function LoginPage() {
           자동 로그인
         </div>
         <div className={"btnDiv"}>
-          <button>로그인</button>
+          <StyledButton>로그인</StyledButton>
         </div>
       </div>
     </StyledLogin>
