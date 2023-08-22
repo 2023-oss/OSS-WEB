@@ -3,12 +3,8 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css"; // css import
 
 function MyCalendar() {
-  const [value, onChange] = useState(new Date());
+  const [value, onChange] = useState<any>(new Date());
 
-  return (
-    <div>
-      <Calendar onChange={onChange} value={value} />
-    </div>
-  );
+  return <div>{/* <Calendar onChange={onChange} value={value} /> */}</div>;
 }
 export default MyCalendar;

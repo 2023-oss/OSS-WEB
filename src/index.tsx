@@ -9,9 +9,10 @@ import {
   Link,
 } from "react-router-dom";
 import LoginPage from "./pages/login_page";
-import DocumentsPage from "./pages/documents_pages";
+import DocumentsPage from "./pages/documents_page";
 import EditDocumentPage from "./pages/edit_document_page";
 import SortablePage from "./pages/sortable";
+import JoinPage from "./pages/join_page";
 const router = createBrowserRouter([
   /**
    * 동의서를 목록
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
   {
     path: "/sort",
     element: <SortablePage />,
+  },
+  {
+    path: "/join",
+    element: <JoinPage />,
   },
 ]);
 
