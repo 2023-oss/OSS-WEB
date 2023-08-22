@@ -17,6 +17,10 @@ const tabPanels = [
   },
   {
     index: 4,
+    filterCategory: "payment",
+  },
+  {
+    index: 5,
     filterCategory: "etc",
   },
 ];

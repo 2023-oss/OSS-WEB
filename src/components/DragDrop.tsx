@@ -14,6 +14,7 @@ import { Typography, Tabs, Tab, Box } from "@mui/material";
 import styled from "styled-components";
 import CategoryTabs from "./CategoryTabs";
 import tabPanels from "../data/tab-panels";
+import tabs from "../data/tabs";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -167,9 +168,9 @@ export default function DragDropExample({
             onChange={handleTabChange}
             aria-label="Vertical tabs example"
           >
-            <Tab label="기본" />
-            <Tab label="개인정보" />
-            <Tab label="안전" />
+            {tabs.map((t) => (
+              <Tab label={t.category} />
+            ))}
           </Tabs>
           <DragDropContext onDragEnd={handleDragEnd}>
             <div className="grid flex-1 select-none grid-cols-3 gap-4 rounded-lg">
@@ -215,73 +216,6 @@ export default function DragDropExample({
                               {provided.placeholder}
                             </TabPanel>
                           ))}
-                          {/* <TabPanel value={tabValue} index={0}>
-                            {blocks[key as BlockStatus]
-                              .filter((item) => item.category === "default")
-                              .map((item, index) => (
-                                <Draggable
-                                  key={item.id}
-                                  draggableId={item.id}
-                                  index={index}
-                                >
-                                  {(provided, snapshot) =>
-                                    renderDraggable(
-                                      provided,
-                                      snapshot,
-                                      item,
-                                      index
-                                    )
-                                  }
-                                </Draggable>
-                              ))}
-                            {provided.placeholder}
-                          </TabPanel>
-                          <TabPanel value={tabValue} index={1}>
-                            {blocks[key as BlockStatus]
-                              .filter(
-                                (item) => item.category === "personal-info"
-                              )
-                              .map((item, index) => (
-                                <Draggable
-                                  key={item.id}
-                                  draggableId={item.id}
-                                  index={index}
-                                >
-                                  {(provided, snapshot) =>
-                                    renderDraggable(
-                                      provided,
-                                      snapshot,
-                                      item,
-                                      index
-                                    )
-                                  }
-                                </Draggable>
-                              ))}
-                            {provided.placeholder}
-                          </TabPanel>
-                          <TabPanel value={tabValue} index={2}>
-                            <>
-                              {blocks[key as BlockStatus]
-                                .filter((item) => item.category === "safety")
-                                .map((item, index) => (
-                                  <Draggable
-                                    key={item.id}
-                                    draggableId={item.id}
-                                    index={index}
-                                  >
-                                    {(provided, snapshot) =>
-                                      renderDraggable(
-                                        provided,
-                                        snapshot,
-                                        item,
-                                        index
-                                      )
-                                    }
-                                  </Draggable>
-                                ))}
-                              {provided.placeholder}
-                            </>
-                          </TabPanel> */}
                         </>
                       ) : (
                         <>
