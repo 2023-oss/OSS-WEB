@@ -1,5 +1,8 @@
+import { Link } from "react-router-dom";
 import { styled } from "styled-components";
-
+import axios from "axios";
+import { login } from "../lib/api";
+import { log } from "console";
 export default function LoginPage() {
   const StyledButton = styled.div`
     background-color: #ffa0a0;
@@ -18,11 +21,11 @@ export default function LoginPage() {
     .logo {
       display: flex;
       justify-content: center;
-      margin-top: 149px;
+      margin-top: 44px;
     }
     .logo img {
-      width: 149px;
-      height: 149px;
+      width: 152px;
+      height: 146px;
     }
     .input-box {
       display: flex;
@@ -58,25 +61,49 @@ export default function LoginPage() {
       font-weight: 500;
       margin-top: 20px;
     }
+    .etc2 {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
   `;
+
+  const loginBtn = async () => {
+    const username = "eunsol";
+    const password = "123123";
+    try {
+      const res = await login({ username, password });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <StyledLogin>
       <div>
         <div className={"logo"}>
-          <img src="icon\Logo.png"></img>
+          <img src="/icon/Logo.png"></img>
         </div>
-        <div className={"idInput"}>
+        <div className={"input-box"}>
           <input type="text" placeholder="아이디"></input>
         </div>
-        <div className={"pwdInput"}>
+        <div className={"input-box"}>
           <input type="text" placeholder="비밀번호"></input>
         </div>
         <div className={"etc"}>
           <input type="checkbox"></input>
           자동 로그인
         </div>
+
         <div className={"btnDiv"}>
-          <button>로그인</button>
+          <StyledButton>로그인</StyledButton>
+        </div>
+        <div className={"etc2"}>
+          <Link to={"/join"}>
+            <span>회원 가입</span>
+          </Link>
+          <Link to="/">
+            <span>아이디 | 비밀번호 찾기</span>
+          </Link>
         </div>
       </div>
     </StyledLogin>
