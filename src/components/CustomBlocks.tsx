@@ -1,8 +1,22 @@
 import React, { useState } from "react";
-import initialData from "../data/initial-data";
 import DragDropExample from "./DragDrop";
+import DragDropTest from "./DragDrop_test";
+import {
+  initialData,
+  // personalInfoData,
+  // safetyData,
+} from "../data/initial-data";
+import DragDropBox from "./DragDropBox";
+import { initial } from "lodash";
 
-export type BlockStatus = "boxes" | "customblocks";
+export type BlockStatus =
+  | "default"
+  // | "personalInfo"
+  // | "safety"
+  // | "responsibility"
+  // | "payment"
+  // | "etc"
+  | "customblocks";
 
 export type Block = {
   id: string;
@@ -19,7 +33,13 @@ export type Blocks = {
 
 export default function CustomBlocks() {
   const [blocks, setBlocks] = useState<Blocks>({
-    boxes: initialData,
+    default: initialData,
+    // default: [],
+    // personalInfo: personalInfoData,
+    // safety: safetyData,
+    // responsibility: [],
+    // payment: [],
+    // etc: [],
     customblocks: [],
   });
 

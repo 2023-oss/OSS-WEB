@@ -15,8 +15,6 @@ import styled from "styled-components";
 import CategoryTabs from "./CategoryTabs";
 import tabPanels from "../data/tab-panels";
 import tabs from "../data/tabs";
-import { RenderDraggable } from "./RenderDraggable";
-import { isTSEntityName } from "@babel/types";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -86,7 +84,7 @@ const CustomDraggable: React.FC<CustomDraggableProps> = ({
   );
 };
 
-export default function DragDropExample({
+export default function DragDropTest({
   blocks,
   setBlocks,
 }: {
@@ -115,6 +113,7 @@ export default function DragDropExample({
 
     const sourceKey = source.droppableId as BlockStatus;
     const destinationKey = destination.droppableId as BlockStatus;
+
     if (sourceKey === destinationKey) {
       return; // 같은 droppable 내에서의 이동은 무시
     }
@@ -199,22 +198,9 @@ export default function DragDropExample({
     >
       <h5 className="font-semibold">{item.category}</h5>
       <h5 className="font-semibold">{item.content}</h5>
-      <input
-        type="text"
-        value={item.content}
-        onChange={(e) => handleContentChange(item.index, e.target.value)}
-      />
       <span className="text-sm text-gray-500">예시</span>
     </div>
   );
-
-  const handleContentChange = (itemIndex: number, newContent: string) => {
-    // content 변경을 위한 로직
-    const updatedBlocks = blocks["customblocks"].map((item) =>
-      item.index === itemIndex ? { ...item, content: newContent } : item
-    );
-    setBlocks({ ...blocks, customblocks: updatedBlocks });
-  };
 
   return (
     <div className="p-4">
@@ -251,7 +237,7 @@ export default function DragDropExample({
                       <span className="text-xs font-semibold">
                         {key.toLocaleUpperCase()}
                       </span>
-                      {key === "default" ? (
+                      {key === "boxes" ? (
                         <>
                           {tabPanels.map((tabPanel) => (
                             <TabPanel value={tabValue} index={tabPanel.index}>
@@ -260,24 +246,14 @@ export default function DragDropExample({
                                   (item) =>
                                     item.category === tabPanel.filterCategory
                                 )
-                                .map((item) => (
-                                  <Draggable
+                                .map((item, index) => (
+                                  <CustomDraggable
                                     key={item.id}
-                                    draggableId={item.id}
-                                    index={item.index}
-                                  >
-                                    {(provided, snapshot) => (
-                                      <RenderDraggable
-                                        provided={provided}
-                                        snapshot={snapshot}
-                                        item={item}
-                                        index={item.index}
-                                        handleContentChange={
-                                          handleContentChange
-                                        }
-                                      />
-                                    )}
-                                  </Draggable>
+                                    item={item}
+                                    index={index}
+                                    selectedItems={clickedBlocks}
+                                    toggleSelect={toggleSelect}
+                                  />
                                 ))}
                               {provided.placeholder}
                             </TabPanel>
@@ -285,19 +261,14 @@ export default function DragDropExample({
                         </>
                       ) : (
                         <>
-                          {blocks[key as BlockStatus].map((item) => (
+                          {blocks[key as BlockStatus].map((item, index) => (
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
-                              index={item.index}
+                              index={index}
                             >
                               {(provided, snapshot) =>
-                                renderDraggable(
-                                  provided,
-                                  snapshot,
-                                  item,
-                                  item.index
-                                )
+                                renderDraggable(provided, snapshot, item, index)
                               }
                             </Draggable>
                           ))}
