@@ -185,36 +185,36 @@ export default function DragDropExample({
     setTabValue(newValue);
   };
 
-  const renderDraggable = (
-    provided: DraggableProvided,
-    snapshot: DraggableStateSnapshot,
-    item: Block,
-    index: number
-  ) => (
-    <div
-      ref={provided.innerRef}
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
-      className={getCardClassName(snapshot, item.category)}
-    >
-      <h5 className="font-semibold">{item.category}</h5>
-      <h5 className="font-semibold">{item.content}</h5>
-      <input
-        type="text"
-        value={item.content}
-        onChange={(e) => handleContentChange(item.index, e.target.value)}
-      />
-      <span className="text-sm text-gray-500">예시</span>
-    </div>
-  );
+  // const renderDraggable = (
+  //   provided: DraggableProvided,
+  //   snapshot: DraggableStateSnapshot,
+  //   item: Block,
+  //   index: number
+  // ) => (
+  //   <div
+  //     ref={provided.innerRef}
+  //     {...provided.draggableProps}
+  //     {...provided.dragHandleProps}
+  //     className={getCardClassName(snapshot, item.category)}
+  //   >
+  //     <h5 className="font-semibold">{item.category}</h5>
+  //     <h5 className="font-semibold">{item.content}</h5>
+  //     <input
+  //       type="text"
+  //       value={item.content}
+  //       onChange={(e) => handleContentChange(item.index, e.target.value)}
+  //     />
+  //     <span className="text-sm text-gray-500">예시</span>
+  //   </div>
+  // );
 
-  const handleContentChange = (itemIndex: number, newContent: string) => {
-    // content 변경을 위한 로직
-    const updatedBlocks = blocks["customblocks"].map((item) =>
-      item.index === itemIndex ? { ...item, content: newContent } : item
-    );
-    setBlocks({ ...blocks, customblocks: updatedBlocks });
-  };
+  // const handleContentChange = (itemIndex: number, newContent: string) => {
+  //   // content 변경을 위한 로직
+  //   const updatedBlocks = blocks["customblocks"].map((item) =>
+  //     item.index === itemIndex ? { ...item, content: newContent } : item
+  //   );
+  //   setBlocks({ ...blocks, customblocks: updatedBlocks });
+  // };
 
   return (
     <div className="p-4">
@@ -266,17 +266,13 @@ export default function DragDropExample({
                                     draggableId={item.id}
                                     index={item.index}
                                   >
-                                    {(provided, snapshot) => 
+                                    {(provided, snapshot) => (
                                       <RenderDraggable
                                         provided={provided}
                                         snapshot={snapshot}
                                         item={item}
-                                        index={item.index}
-                                        handleContentChange={
-                                          handleContentChange
-                                        }
                                       ></RenderDraggable>
-                                    }
+                                    )}
                                   </Draggable>
                                 ))}
                               {provided.placeholder}
@@ -285,7 +281,7 @@ export default function DragDropExample({
                         </>
                       ) : (
                         <>
-                          {blocks[key as BlockStatus].map((item) => (
+                          {/* {blocks[key as BlockStatus].map((item) => (
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
@@ -301,7 +297,7 @@ export default function DragDropExample({
                               }
                             </Draggable>
                           ))}
-                          {provided.placeholder}
+                          {provided.placeholder} */}
                         </>
                       )}
                     </div>
