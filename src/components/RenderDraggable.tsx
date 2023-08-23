@@ -2,12 +2,12 @@ import { DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { Block } from "./CustomBlocks";
 import React, { useEffect, useState } from "react";
 
-export  function RenderDraggable(props: {
+export function RenderDraggable(props: {
   provided: DraggableProvided;
   snapshot: DraggableStateSnapshot;
   item: Block;
   index: number;
-  handleContentChange: (content: string, index: number) => void,
+  handleContentChange: (content: string, index: number) => void;
 }) {
   // const [block, setBlock] = useState<Block>(props.item);
   // const handleContentChange = (newContent: string) => {

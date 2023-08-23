@@ -15,7 +15,7 @@ import styled from "styled-components";
 import CategoryTabs from "./CategoryTabs";
 import tabPanels from "../data/tab-panels";
 import tabs from "../data/tabs";
-import {RenderDraggable} from "./RenderDraggable";
+import { RenderDraggable } from "./RenderDraggable";
 import { isTSEntityName } from "@babel/types";
 import { log } from "console";
 
@@ -95,7 +95,7 @@ export default function DragDropExample({
   setBlocks: (blocks: Blocks) => void;
 }) {
   console.log(blocks);
-  
+
   const [enabled, setEnabled] = useState(false);
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
@@ -214,14 +214,12 @@ export default function DragDropExample({
   const handleContentChange = (content: string, index: number) => {
     // content 변경을 위한 로직
     console.log(index, content);
-    
+
     const updatedBlocks = blocks["customblocks"].map((item) =>
       item.index === index ? { ...item, content: content } : item
     );
     setBlocks({ ...blocks, customblocks: updatedBlocks });
   };
-
-
 
   return (
     <div className="p-4">
@@ -279,7 +277,9 @@ export default function DragDropExample({
                                         snapshot={snapshot}
                                         item={item}
                                         index={index}
-                                        handleContentChange={handleContentChange}
+                                        handleContentChange={
+                                          handleContentChange
+                                        }
                                       ></RenderDraggable>
                                     )}
                                   </Draggable>
@@ -296,15 +296,15 @@ export default function DragDropExample({
                               draggableId={item.id}
                               index={item.index}
                             >
-                              {(provided, snapshot) =>
+                              {(provided, snapshot) => (
                                 <RenderDraggable
                                   provided={provided}
                                   snapshot={snapshot}
                                   item={item}
                                   index={index}
                                   handleContentChange={handleContentChange}
-                              ></RenderDraggable>
-                              }
+                                ></RenderDraggable>
+                              )}
                             </Draggable>
                           ))}
                           {provided.placeholder}
