@@ -2,13 +2,16 @@ import { DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { Block } from "./CustomBlocks";
 import React, { useEffect, useState } from "react";
 
-export  function RenderDraggable(props: {
+interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
   provided: DraggableProvided;
   snapshot: DraggableStateSnapshot;
   item: Block;
   index: number;
   handleContentChange: (content: string, index: number) => void,
-}) {
+  className: string;
+}
+
+export function RenderDraggable(props: RenderDraggableProps) {
   // const [block, setBlock] = useState<Block>(props.item);
   // const handleContentChange = (newContent: string) => {
   //   // content 변경을 위한 로직
@@ -17,6 +20,7 @@ export  function RenderDraggable(props: {
   // };
   return (
     <div
+      className={props.className}
       ref={props.provided.innerRef}
       {...props.provided.draggableProps}
       {...props.provided.dragHandleProps}

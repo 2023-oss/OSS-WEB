@@ -156,6 +156,10 @@ export default function DragDropExample({
   };
 
   useEffect(() => {
+    setSelectedBlocks(blocks['customblocks']);
+  }, [blocks])
+
+  useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
     return () => {
@@ -218,6 +222,7 @@ export default function DragDropExample({
     const updatedBlocks = blocks["customblocks"].map((item) =>
       item.index === index ? { ...item, content: content } : item
     );
+
     setBlocks({ ...blocks, customblocks: updatedBlocks });
   };
 
@@ -280,6 +285,7 @@ export default function DragDropExample({
                                         item={item}
                                         index={index}
                                         handleContentChange={handleContentChange}
+                                        className={getCardClassName(snapshot, item.category)}
                                       ></RenderDraggable>
                                     )}
                                   </Draggable>
@@ -303,6 +309,7 @@ export default function DragDropExample({
                                   item={item}
                                   index={index}
                                   handleContentChange={handleContentChange}
+                                  className={getCardClassName(snapshot, item.category)}
                               ></RenderDraggable>
                               }
                             </Draggable>
