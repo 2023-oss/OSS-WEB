@@ -15,7 +15,7 @@ import styled from "styled-components";
 import CategoryTabs from "./CategoryTabs";
 import tabPanels from "../data/tab-panels";
 import tabs from "../data/tabs";
-import { RenderDraggable } from "./RenderDraggable";
+import RenderDraggable from "./RenderDraggable";
 import { isTSEntityName } from "@babel/types";
 
 export const $ = (...classnames: any[]) => {
@@ -266,7 +266,7 @@ export default function DragDropExample({
                                     draggableId={item.id}
                                     index={item.index}
                                   >
-                                    {(provided, snapshot) => (
+                                    {(provided, snapshot) => 
                                       <RenderDraggable
                                         provided={provided}
                                         snapshot={snapshot}
@@ -275,8 +275,8 @@ export default function DragDropExample({
                                         handleContentChange={
                                           handleContentChange
                                         }
-                                      />
-                                    )}
+                                      ></RenderDraggable>
+                                    }
                                   </Draggable>
                                 ))}
                               {provided.placeholder}
