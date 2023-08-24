@@ -11,10 +11,9 @@ import {
 } from "react-beautiful-dnd";
 import { Block, BlockStatus, Blocks } from "./CustomBlocks";
 import { Typography, Tabs, Tab, Box } from "@mui/material";
-import styled from "styled-components";
-import CategoryTabs from "./CategoryTabs";
 import tabPanels from "../data/tab-panels";
 import tabs from "../data/tabs";
+import { RenderDraggable } from "./RenderDraggable";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -46,17 +45,37 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
   );
 };
 
-export default function DragDropExample({
+interface CustomDraggableProps {
+  item: Block;
+  index: number;
+  selectedItems: Block[];
+  toggleSelect: (clickedBlock: Block) => void;
+}
+
+export default function DragDrop({
   blocks,
   setBlocks,
 }: {
   blocks: Blocks;
   setBlocks: (blocks: Blocks) => void;
 }) {
+  console.log(blocks);
+
   const [enabled, setEnabled] = useState(false);
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
+  const [clickedBlocks, setClickedBlocks] = useState<Block[]>([]);
+
+  const toggleSelect = (clickedBlock: Block) => {
+    setSelectedBlocks((prevSelectedItems) =>
+      prevSelectedItems.includes(clickedBlock)
+        ? prevSelectedItems.filter((p) => p.id !== clickedBlock.id)
+        : [...prevSelectedItems, clickedBlock]
+    );
+    console.log(selectedBlocks);
+  };
+
   const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) {
       return;
@@ -64,12 +83,11 @@ export default function DragDropExample({
 
     const sourceKey = source.droppableId as BlockStatus;
     const destinationKey = destination.droppableId as BlockStatus;
-
     if (sourceKey === destinationKey) {
       return; // 같은 droppable 내에서의 이동은 무시
     }
     // customblocks=>boxes 이동 시 삭제
-    else if (sourceKey === "customblocks") {
+    else if (sourceKey === "after") {
       const newBlocks = { ...blocks };
       // 이동하는 Block 객체 찾기
       const movedBlock = { ...blocks[sourceKey][source.index] };
@@ -78,7 +96,7 @@ export default function DragDropExample({
       newBlocks[sourceKey].splice(source.index, 1);
       console.log(newBlocks);
       setBlocks(newBlocks);
-      setSelectedBlocks(newBlocks["customblocks"]);
+      setSelectedBlocks(newBlocks["after"]);
     }
     // 서로 다른 droppable 간의 이동은 복사
     else {
@@ -97,10 +115,14 @@ export default function DragDropExample({
 
       console.log("after : ", newBlocks);
       setBlocks(newBlocks);
-      setSelectedBlocks(newBlocks["customblocks"]);
+      setSelectedBlocks(newBlocks["after"]);
       console.log("selected blocks", selectedBlocks);
     }
   };
+
+  useEffect(() => {
+    setSelectedBlocks(blocks["after"]);
+  }, [blocks]);
 
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
@@ -135,23 +157,39 @@ export default function DragDropExample({
     setTabValue(newValue);
   };
 
-  const renderDraggable = (
-    provided: DraggableProvided,
-    snapshot: DraggableStateSnapshot,
-    item: Block,
-    index: number
-  ) => (
-    <div
-      ref={provided.innerRef}
-      {...provided.draggableProps}
-      {...provided.dragHandleProps}
-      className={getCardClassName(snapshot, item.category)}
-    >
-      <h5 className="font-semibold">{item.category}</h5>
-      <h5 className="font-semibold">{item.content}</h5>
-      <span className="text-sm text-gray-500">예시</span>
-    </div>
-  );
+  // const renderDraggable = (
+  //   provided: DraggableProvided,
+  //   snapshot: DraggableStateSnapshot,
+  //   item: Block,
+  //   index: number
+  // ) => (
+  //   <div
+  //     ref={provided.innerRef}
+  //     {...provided.draggableProps}
+  //     {...provided.dragHandleProps}
+  //     className={getCardClassName(snapshot, item.category)}
+  //   >
+  //     <h5 className="font-semibold">{item.category}</h5>
+  //     <h5 className="font-semibold">{item.content}</h5>
+  //     <input
+  //       type="text"
+  //       value={item.content}
+  //       onChange={(e) => handleContentChange(item.index, e.target.value)}
+  //     />
+  //     <span className="text-sm text-gray-500">예시</span>
+  //   </div>
+  // );
+
+  const handleContentChange = (content: string, index: number) => {
+    // content 변경을 위한 로직
+    console.log(index, content);
+
+    const updatedBlocks = blocks["after"].map((item) =>
+      item.index === index ? { ...item, content: content } : item
+    );
+
+    setBlocks({ ...blocks, after: updatedBlocks });
+  };
 
   return (
     <div className="p-4">
@@ -181,14 +219,14 @@ export default function DragDropExample({
                       ref={provided.innerRef}
                       {...provided.droppableProps}
                       className={$(
-                        "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#000000]",
+                        "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#fff]",
                         snapshot.isDraggingOver ? "shadow-lg" : "shadow"
                       )}
                     >
                       <span className="text-xs font-semibold">
                         {key.toLocaleUpperCase()}
                       </span>
-                      {key === "boxes" ? (
+                      {key === "before" ? (
                         <>
                           {tabPanels.map((tabPanel) => (
                             <TabPanel value={tabValue} index={tabPanel.index}>
@@ -201,16 +239,23 @@ export default function DragDropExample({
                                   <Draggable
                                     key={item.id}
                                     draggableId={item.id}
-                                    index={index}
+                                    index={item.index}
                                   >
-                                    {(provided, snapshot) =>
-                                      renderDraggable(
-                                        provided,
-                                        snapshot,
-                                        item,
-                                        index
-                                      )
-                                    }
+                                    {(provided, snapshot) => (
+                                      <RenderDraggable
+                                        provided={provided}
+                                        snapshot={snapshot}
+                                        item={item}
+                                        index={index}
+                                        handleContentChange={
+                                          handleContentChange
+                                        }
+                                        className={getCardClassName(
+                                          snapshot,
+                                          item.category
+                                        )}
+                                      ></RenderDraggable>
+                                    )}
                                   </Draggable>
                                 ))}
                               {provided.placeholder}
@@ -223,11 +268,21 @@ export default function DragDropExample({
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
-                              index={index}
+                              index={item.index}
                             >
-                              {(provided, snapshot) =>
-                                renderDraggable(provided, snapshot, item, index)
-                              }
+                              {(provided, snapshot) => (
+                                <RenderDraggable
+                                  provided={provided}
+                                  snapshot={snapshot}
+                                  item={item}
+                                  index={index}
+                                  handleContentChange={handleContentChange}
+                                  className={getCardClassName(
+                                    snapshot,
+                                    item.category
+                                  )}
+                                ></RenderDraggable>
+                              )}
                             </Draggable>
                           ))}
                           {provided.placeholder}

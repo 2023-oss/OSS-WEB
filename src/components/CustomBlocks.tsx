@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import initialData from "../data/initial-data";
 import DragDropExample from "./DragDrop";
-
-export type BlockStatus = "boxes" | "customblocks";
+import { initialData } from "../data/initial-data";
+import DragDrop from "./DragDrop";
+export type BlockStatus = "before" | "after";
 
 export type Block = {
   id: string;
@@ -19,13 +19,13 @@ export type Blocks = {
 
 export default function CustomBlocks() {
   const [blocks, setBlocks] = useState<Blocks>({
-    boxes: initialData,
-    customblocks: [],
+    before: initialData,
+    after: [],
   });
 
   return (
     <div>
-      <DragDropExample blocks={blocks} setBlocks={setBlocks} />
+      <DragDrop blocks={blocks} setBlocks={setBlocks} />
     </div>
   );
 }

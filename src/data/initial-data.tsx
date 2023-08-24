@@ -1,38 +1,147 @@
 import { Block, BlockStatus } from "../components/CustomBlocks";
 
-const initialData: Block[] = [
+export const initialData: Block[] = [
   {
     id: "block-1",
-    status: "boxes",
+    status: "before",
     category: "personal-info",
-    content: "개인정보동의?",
+    content:
+      "제공하신 정보는 해당 업체 이용정보 및 공지사항 전달, 이벤트 관련 정보 제공 등을 위해 사용합니다.",
+    ex: "예시",
+    index: 0,
+  },
+  {
+    id: "block-2",
+    status: "before",
+    category: "personal-info",
+    content: "개인정보 제공자가 동의한 내용을 다른 목적으로 활용하지 않습니다",
     ex: "예시",
     index: 1,
   },
   {
-    id: "block-2",
-    status: "boxes",
+    id: "block-3",
+    status: "before",
     category: "personal-info",
-    content: "동의하세요!",
+    content:
+      "귀하는 이에 대한 동의를 거부할 수 있으며, 거부 시 해당업체 정보 제공이 불가능합니다.",
     ex: "예시",
     index: 2,
   },
   {
-    id: "block-3",
-    status: "boxes",
-    category: "safety",
-    content: "안전",
+    id: "block-4",
+    status: "before",
+    category: "personal-info",
+    content:
+      "본 계약서에 기재된 내용 외 구두 약속 또는 서면 약정은 효력이 발생하지 않습니다.",
     ex: "예시",
     index: 3,
   },
   {
-    id: "block-4",
-    status: "boxes",
-    category: "safety",
-    content: "책임노",
+    id: "block-5",
+    status: "before",
+    category: "personal-info",
+    content:
+      "해당업체와 회원은 본 계약의 각 항목을 성실히 이행할 것을 확약하고 다음과 같이 업체에 이용권을 신청합니다.",
     ex: "예시",
     index: 4,
   },
+  {
+    id: "block-6",
+    status: "before",
+    category: "personal-info",
+    content: "",
+    ex: "예시",
+    index: 5,
+  },
+  {
+    id: "block-7",
+    status: "before",
+    category: "safety",
+    content:
+      "___는 위험한 스포츠이며 부상에 위험이 있음을 충분히 이해하고 참여합니다.",
+    ex: "예시",
+    index: 6,
+  },
+  {
+    id: "block-8",
+    status: "before",
+    category: "safety",
+    content:
+      "본 시설이용시 시설관리자 및 안전요원의 통제에 성실히 따르며 이행하지 않을 시 강제 퇴장 될 수 있습니다.",
+    ex: "예시",
+    index: 7,
+  },
+  {
+    id: "block-9",
+    status: "before",
+    category: "safety",
+    content: "임산부,노약자,어린이및 지병이 있는 경우 시설 이용이 불가 합니다.",
+    ex: "예시",
+    index: 8,
+  },
+  {
+    id: "block-10",
+    status: "before",
+    category: "safety",
+    content:
+      "시설 및 기구 이용시 무리한 행동은 하지 않으며 밀거나 장난치는 행위는 사고로 발생할 수 있으며 금지합니다.",
+    ex: "예시",
+    index: 9,
+  },
+  {
+    id: "block-11",
+    status: "before",
+    category: "safety",
+    content: " 만 __세 이하 어린이의 경우 법적 보호자 탑승이 필수입니다.",
+    ex: "예시",
+    index: 10,
+  },
+  {
+    id: "block-12",
+    status: "before",
+    category: "safety",
+    content: "",
+    ex: "",
+    index: 11,
+  },
+  {
+    id: "block-13",
+    status: "before",
+    category: "default",
+    content: "",
+    ex: "이름",
+    index: 12,
+  },
+  {
+    id: "block-14",
+    status: "before",
+    category: "default",
+    content: "",
+    ex: "성별",
+    index: 13,
+  },
+  {
+    id: "block-15",
+    status: "before",
+    category: "default",
+    content: "",
+    ex: "전화번호",
+    index: 14,
+  },
+  {
+    id: "block-16",
+    status: "before",
+    category: "default",
+    content: "",
+    ex: "주소",
+    index: 15,
+  },
+  {
+    id: "block-17",
+    status: "before",
+    category: "default",
+    content: "",
+    ex: "추가",
+    index: 16,
+  },
 ];
-
-export default initialData;
