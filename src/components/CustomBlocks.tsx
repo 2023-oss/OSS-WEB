@@ -7,6 +7,7 @@ export type BlockStatus = "before" | "after";
 export type Block = {
   id: string;
   status: BlockStatus;
+  isClicked: boolean;
   category: string;
   content: string;
   ex: string;
