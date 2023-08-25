@@ -20,15 +20,21 @@ interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
   index: number;
   handleContentChange: (content: string, index: number) => void;
   className: string;
+  toggleSelect: (clickedBlock: Block) => void;
 }
 
 export function RenderDraggable(props: RenderDraggableProps) {
   return (
     <div
-      className={props.className}
+      className={`${props.className} ${
+        props.item.isClicked ? "bg-blue-300" : ""
+      }`}
       ref={props.provided.innerRef}
       {...props.provided.draggableProps}
       {...props.provided.dragHandleProps}
+      onClick={(e) => {
+        props.toggleSelect(props.item);
+      }}
     >
       <h5 className="font-semibold">{props.item.category}</h5>
       {props.item.category === "default" ? (

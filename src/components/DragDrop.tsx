@@ -45,13 +45,6 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
   );
 };
 
-interface CustomDraggableProps {
-  item: Block;
-  index: number;
-  selectedItems: Block[];
-  toggleSelect: (clickedBlock: Block) => void;
-}
-
 export default function DragDrop({
   blocks,
   setBlocks,
@@ -59,21 +52,23 @@ export default function DragDrop({
   blocks: Blocks;
   setBlocks: (blocks: Blocks) => void;
 }) {
-  console.log(blocks);
-
   const [enabled, setEnabled] = useState(false);
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
-  const [clickedBlocks, setClickedBlocks] = useState<Block[]>([]);
 
   const toggleSelect = (clickedBlock: Block) => {
-    setSelectedBlocks((prevSelectedItems) =>
-      prevSelectedItems.includes(clickedBlock)
-        ? prevSelectedItems.filter((p) => p.id !== clickedBlock.id)
-        : [...prevSelectedItems, clickedBlock]
+    // 무조건 before 상태일 때만 선택 가능
+    // after 상태일 때 선택 불가(버튼으로 삭제 가능하게)
+    if (clickedBlock.status === "after") {
+      return;
+    }
+    const updatedBlocks = blocks["before"].map((item) =>
+      item.id === clickedBlock.id
+        ? { ...item, isClicked: !item.isClicked }
+        : item
     );
-    console.log(selectedBlocks);
+    setBlocks({ ...blocks, before: updatedBlocks });
   };
 
   const handleDragEnd = ({ source, destination }: DropResult) => {
@@ -104,14 +99,30 @@ export default function DragDrop({
       const newBlocks = { ...blocks };
       console.log("before : ", newBlocks);
 
-      // 이동하는 Block 객체 찾기
-      const movedBlock = { ...blocks[sourceKey][source.index] };
-      console.log(movedBlock);
-      // movedBlock의 id를 변경해 복사
-      const copiedBlock = { ...movedBlock, id: `block-${Date.now()}` };
-      // Blocks에 copiedBlock 저장
-      newBlocks[destinationKey].splice(destination.index, 0, copiedBlock);
-      //splice(start: number - 시작 인덱스, deleteCount: number -삭제할 요소의 수, ...items: T[] - 추가될 요소): T[];
+      const movedBlocks = blocks["before"].filter((item) => item.isClicked);
+      if (movedBlocks.length > 0) {
+        const copiedBlocks = movedBlocks.map((movedBlocks) => ({
+          ...movedBlocks,
+          id: `block-${Date.now()}`,
+          isClicked: false,
+        }));
+        newBlocks[destinationKey].splice(destination.index, 0, ...copiedBlocks);
+        newBlocks[sourceKey].forEach((block) => {
+          block.isClicked = false;
+        });
+      } else {
+        // 이동하는 Block 객체 찾기
+        const movedBlock = { ...blocks[sourceKey][source.index] };
+        console.log(movedBlock);
+        // movedBlock의 id를 변경해 복사
+        const copiedBlock = {
+          ...movedBlock,
+          id: `block-${Date.now()}`,
+        };
+        // Blocks에 copiedBlock 저장
+        newBlocks[destinationKey].splice(destination.index, 0, copiedBlock);
+        //splice(start: number - 시작 인덱스, deleteCount: number -삭제할 요소의 수, ...items: T[] - 추가될 요소): T[];
+      }
 
       console.log("after : ", newBlocks);
       setBlocks(newBlocks);
@@ -143,42 +154,20 @@ export default function DragDrop({
   ) {
     const baseClassName =
       "rounded-lg bg-white p-4 transition-shadow dark:bg-[#121212]";
+    return baseClassName;
 
-    if (category === "personal-info") {
-      return `${baseClassName} shadow bg-blue-200`;
-    } else if (category === "safety") {
-      return `${baseClassName} shadow bg-green-300`;
-    } else {
-      return `${baseClassName} shadow`;
-    }
+    // if (category === "personal-info") {
+    //   return `${baseClassName} shadow bg-blue-200`;
+    // } else if (category === "safety") {
+    //   return `${baseClassName} shadow bg-green-300`;
+    // } else {
+    //   return `${baseClassName} shadow`;
+    // }
   }
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
-
-  // const renderDraggable = (
-  //   provided: DraggableProvided,
-  //   snapshot: DraggableStateSnapshot,
-  //   item: Block,
-  //   index: number
-  // ) => (
-  //   <div
-  //     ref={provided.innerRef}
-  //     {...provided.draggableProps}
-  //     {...provided.dragHandleProps}
-  //     className={getCardClassName(snapshot, item.category)}
-  //   >
-  //     <h5 className="font-semibold">{item.category}</h5>
-  //     <h5 className="font-semibold">{item.content}</h5>
-  //     <input
-  //       type="text"
-  //       value={item.content}
-  //       onChange={(e) => handleContentChange(item.index, e.target.value)}
-  //     />
-  //     <span className="text-sm text-gray-500">예시</span>
-  //   </div>
-  // );
 
   const handleContentChange = (content: string, index: number) => {
     // content 변경을 위한 로직
@@ -254,6 +243,7 @@ export default function DragDrop({
                                           snapshot,
                                           item.category
                                         )}
+                                        toggleSelect={toggleSelect}
                                       ></RenderDraggable>
                                     )}
                                   </Draggable>
@@ -281,6 +271,7 @@ export default function DragDrop({
                                     snapshot,
                                     item.category
                                   )}
+                                  toggleSelect={toggleSelect}
                                 ></RenderDraggable>
                               )}
                             </Draggable>
