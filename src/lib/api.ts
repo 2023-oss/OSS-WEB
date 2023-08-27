@@ -13,3 +13,27 @@ export const login = ({
     username: username,
     password: password,
   });
+
+export const signUp = ({
+  userId,
+  pw,
+  userName,
+  company,
+  companyType,
+  email,
+}: {
+  userId: string;
+  pw: string;
+  userName: string;
+  company: string;
+  companyType: string;
+  email: string;
+}) =>
+  api.post("/auth/join", {
+    userId: userId,
+    pw: pw,
+    userName: userName,
+    company: company,
+    companyType: companyType,
+    email: email,
+  });
