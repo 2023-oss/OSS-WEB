@@ -3,6 +3,8 @@ import { styled } from "styled-components";
 import axios from "axios";
 import { login } from "../lib/api";
 import { log } from "console";
+import { useState } from "react";
+
 export default function LoginPage() {
   const StyledButton = styled.div`
     background-color: #ffa0a0;
@@ -21,11 +23,11 @@ export default function LoginPage() {
     .logo {
       display: flex;
       justify-content: center;
-      margin-top: 44px;
+      margin-top: 149px;
     }
     .logo img {
-      width: 152px;
-      height: 146px;
+      width: 149px;
+      height: 149px;
     }
     .input-box {
       display: flex;
@@ -68,15 +70,35 @@ export default function LoginPage() {
     }
   `;
 
-  const loginBtn = async () => {
-    const username = "eunsol";
-    const password = "123123";
-    try {
-      const res = await login({ username, password });
-    } catch (error) {
-      console.log(error);
-    }
+  // const loginBtn = async () => {
+  //   const username = "eunsol";
+  //   const password = "123123";
+  //   try {
+  //     const res = await login({ username, password });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleUsernameChange = (e: any) => {
+    setUsername(e.target.value);
   };
+  const handlePasswordChange = (e: any) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    // 여기서 로그인 정보를 서버로 보내는 작업 수행
+
+    console.log("사용자명 :", username);
+    console.log("비번 :", password);
+  };
+
   return (
     <StyledLogin>
       <div>
@@ -84,18 +106,28 @@ export default function LoginPage() {
           <img src="/icon/Logo.png"></img>
         </div>
         <div className={"input-box"}>
-          <input type="text" placeholder="아이디"></input>
+          <input
+            type="text"
+            placeholder="아이디"
+            onChange={handleUsernameChange}
+          ></input>
         </div>
         <div className={"input-box"}>
-          <input type="text" placeholder="비밀번호"></input>
+          <input
+            type="text"
+            placeholder="비밀번호"
+            onChange={handlePasswordChange}
+          ></input>
         </div>
-        <div className={"bottom-section"}>
+        <div className={"etc"}>
           <input type="checkbox"></input>
           자동 로그인
         </div>
 
         <div className={"btnDiv"}>
-          <StyledButton>로그인</StyledButton>
+          <StyledButton>
+            <button onClick={handleSubmit}>로그인</button>
+          </StyledButton>
         </div>
         <div className={"etc2"}>
           <Link to={"/join"}>

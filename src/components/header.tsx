@@ -69,7 +69,7 @@ export default function Header(props: HeaderProps) {
         </div>
         <div className="account">
           <Link to="/login">로그인</Link>
-          <span>회원가입</span>
+          <Link to="/join">회원가입</Link>
         </div>
       </StyledHeader>
     </Wrapper>
