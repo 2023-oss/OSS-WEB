@@ -30,24 +30,24 @@ export default function EditDocumentPage() {
     totalPages: 0,
     last: false,
   });
-  const getDocumentList = (pageNumber: number) => {
+  const getDocumentList = async (pageNumber: number) => {
     viewForms(4, pageNumber).then((res) => {
       setPage(res.data);
       setForms(res.data.forms);
       console.log("res : ", res.data);
     });
   };
+  useEffect(() => {
+    getDocumentList(1);
+  }, []); // deps가 빈 배열이므로 마운트될 때만 실행됨.!
+
   const handlePageChange = (pageNumber: number) => {
     getDocumentList(pageNumber);
   };
 
-  useEffect(() => {
-    getDocumentList(1);
-  }, []); // deps가 빈 배열이므로 마운트될 때만 실행됨.!
   return (
     <>
       <Header active={1}></Header>
-      {/* <DocumentList></DocumentList> */}
       <DocumentList forms={forms} />
       <Pagination page={page} onPageChange={handlePageChange} />
     </>

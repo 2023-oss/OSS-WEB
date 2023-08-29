@@ -54,31 +54,6 @@ export default function DocumentList({ forms }: { forms: Form[] }) {
     }
     console.log(clickCnt);
   };
-
-  if (!forms) {
-    return (
-      <Wrapper>
-        <StyledDocumentList>
-          <div className={"date-box"}>
-            <span></span>
-            <button onClick={openCal}>
-              {calbtn && <MyCalendar></MyCalendar>}
-              <img src={"/icon/calender.svg"} alt={"calender"} />
-            </button>
-          </div>
-          <table>
-            <tr>
-              <th>작성날짜</th>
-              <th>이름</th>
-              <th>제목</th>
-              <th>연락처</th>
-              <th>동의서</th>
-            </tr>
-          </table>
-        </StyledDocumentList>
-      </Wrapper>
-    );
-  }
   return (
     <Wrapper>
       <StyledDocumentList>
