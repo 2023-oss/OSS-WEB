@@ -27,7 +27,7 @@ export function RenderDraggable(props: RenderDraggableProps) {
   return (
     <div
       className={`${props.className} ${
-        props.item.isClicked ? "bg-blue-300" : ""
+        props.item.isClicked ? "bg-blue-200" : ""
       }`}
       ref={props.provided.innerRef}
       {...props.provided.draggableProps}
