@@ -91,17 +91,17 @@ export default function DocumentList({ forms }: { forms: Form[] }) {
         </div>
         <table>
           <tr>
+            <th>번호</th>
             <th>작성날짜</th>
             <th>이름</th>
-            <th>제목</th>
             <th>연락처</th>
             <th>동의서</th>
           </tr>
           {forms.map((form: Form) => (
             <tr>
+              <td>{form.id}</td>
               <td>{form.date}</td>
               <td>{form.name}</td>
-              <td>더클라임 동의서</td>
               <td>{form.phone}</td>
               <td>
                 <img src={"/icon/file.svg"} alt={"file"} />
