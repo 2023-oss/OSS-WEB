@@ -4,6 +4,7 @@ import { User, data } from "../data/userList";
 import MyCalendar from "./MyCalendar";
 import { useState } from "react";
 import dayjs from "dayjs";
+import { Form } from "../pages/edit_document_page";
 const StyledDocumentList = styled.div`
   .date-box {
     font-size: 2rem;
@@ -35,12 +36,14 @@ const StyledDocumentList = styled.div`
   }
 `;
 
-export default function DocumentList() {
+export default function DocumentList({ forms }: { forms: Form[] }) {
+  console.log("forms", forms);
   let now = dayjs();
   now.format();
   const documents = [{}];
   const [calbtn, isCalbtn] = useState(false);
   const [clickCnt, setclickCnt] = useState(0);
+
   const openCal = () => {
     setclickCnt((prevCnt) => prevCnt + 1);
 
@@ -63,13 +66,25 @@ export default function DocumentList() {
         </div>
         <table>
           <tr>
+            <th>번호</th>
             <th>작성날짜</th>
             <th>이름</th>
-            <th>제목</th>
             <th>연락처</th>
             <th>동의서</th>
           </tr>
-          {data.map((user: User) => (
+          {forms.map((form: Form) => (
+            <tr>
+              <td>{form.id}</td>
+              <td>{form.date}</td>
+              <td>{form.name}</td>
+              <td>{form.phone}</td>
+              <td>
+                <img src={"/icon/file.svg"} alt={"file"} />
+              </td>
+              <br />
+            </tr>
+          ))}
+          {/* {data.map((user: User) => (
             <tr>
               <td>{user.date}</td>
               <td>{user.writers}</td>
@@ -80,7 +95,7 @@ export default function DocumentList() {
               </td>
               <br />
             </tr>
-          ))}
+          ))} */}
         </table>
       </StyledDocumentList>
     </Wrapper>
