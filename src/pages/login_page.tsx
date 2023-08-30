@@ -89,7 +89,7 @@ export default function LoginPage() {
   const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
   };
-
+  const loginBtn = () => login;
   const handleSubmit = (e: any) => {
     e.preventDefault();
 
@@ -98,7 +98,7 @@ export default function LoginPage() {
     console.log("사용자명 :", username);
     console.log("비번 :", password);
   };
-
+  console.log(username, password);
   return (
     <StyledLogin>
       <div>
@@ -126,7 +126,7 @@ export default function LoginPage() {
 
         <div className={"btnDiv"}>
           <StyledButton>
-            <button onClick={handleSubmit}>로그인</button>
+            <button onClick={loginBtn}>로그인</button>
           </StyledButton>
         </div>
         <div className={"etc2"}>

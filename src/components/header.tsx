@@ -17,6 +17,10 @@ const StyledHeader = styled.header<{ active: number }>`
     font-weight: bold;
     align-items: center;
   }
+  .logo img {
+    width: 93px;
+    height: 93.81px;
+  }
   .nav-list {
     align-items: center;
     flex: 1;
@@ -58,7 +62,9 @@ export default function Header(props: HeaderProps) {
   return (
     <Wrapper>
       <StyledHeader active={props.active}>
-        <div className="logo">OSS</div>
+        <div className="logo">
+          <img src="/icon/titleLogo.png"></img>
+        </div>
         <div className="nav-list">
           <Link to={"/edit"} className="nav">
             동의서 관리

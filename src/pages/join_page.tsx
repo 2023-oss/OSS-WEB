@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import JoinComponent from "../components/joinComponent";
 import { useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { signUp } from "../lib/api";
 
 export default function JoinPage() {
   const StyledButton = styled.div`
@@ -107,8 +108,16 @@ export default function JoinPage() {
       padding: 12px;
     }
   `;
+  const [formData, setFormData] = useState({
+    userId: "",
+    pw: "",
+    userName: "",
+    company: "",
+    companyType: "",
+    email: "",
+  });
   const [cmpType, setCmpType] = useState("");
-
+  const signUpBtn = () => signUp;
   return (
     <StyledJoin>
       <div>
@@ -121,7 +130,10 @@ export default function JoinPage() {
           <div className={"joinBar"}>
             <div className={"name"}>이름</div>
             <div className={"content"}>
-              <input placeholder="이름을 입력하세요"></input>
+              <input
+                placeholder="이름을 입력하세요"
+                value={formData.userName}
+              ></input>
             </div>
           </div>
           <hr></hr>
@@ -130,7 +142,10 @@ export default function JoinPage() {
           <div className={"joinBar"}>
             <div className={"name"}>아이디</div>
             <div className={"content"}>
-              <input placeholder="6~12자의 영문, 숫자만 사용 가능합니다"></input>
+              <input
+                placeholder="6~12자의 영문, 숫자만 사용 가능합니다"
+                value={formData.userId}
+              ></input>
             </div>
           </div>
           <hr></hr>
@@ -139,7 +154,10 @@ export default function JoinPage() {
           <div className={"joinBar"}>
             <div className={"name"}>비밀번호</div>
             <div className={"content"}>
-              <input placeholder="8~20자의 숫자, 특수문자, 영문자만 사용 가능합니다"></input>
+              <input
+                placeholder="8~20자의 숫자, 특수문자, 영문자만 사용 가능합니다"
+                value={formData.pw}
+              ></input>
             </div>
           </div>
           <hr></hr>
@@ -149,7 +167,7 @@ export default function JoinPage() {
           <div className={"joinBar"}>
             <div className={"name"}>기업명</div>
             <div className={"content"}>
-              <input></input>
+              <input value={formData.company}></input>
             </div>
           </div>
           <hr></hr>
@@ -164,7 +182,7 @@ export default function JoinPage() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={cmpType}
+                  value={formData.companyType}
                   label="Type"
                 >
                   <MenuItem value={10}>레저</MenuItem>
@@ -184,7 +202,10 @@ export default function JoinPage() {
           <div className={"joinBar"}>
             <div className={"name"}>이메일</div>
             <div className={"content"}>
-              <input placeholder="xxxx@.com의 형식으로 입력해주세요"></input>
+              <input
+                placeholder="xxxx@.com의 형식으로 입력해주세요"
+                value={formData.email}
+              ></input>
             </div>
           </div>
           <hr></hr>
@@ -192,7 +213,7 @@ export default function JoinPage() {
       </div>
 
       <StyledButton>
-        <button>회원가입</button>
+        <button onClick={signUpBtn}>회원가입</button>
       </StyledButton>
     </StyledJoin>
   );
