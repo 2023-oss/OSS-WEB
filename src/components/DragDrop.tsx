@@ -71,6 +71,16 @@ export default function DragDrop({
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
 
+  const handleRegisterTemplate = () => {
+    registerTemplate(selectedBlocks)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error("Error:", err.response.data.message);
+      });
+  };
+
   const toggleSelect = (clickedBlock: Block) => {
     // 무조건 before 상태일 때만 선택 가능
     // after 상태일 때 선택 불가(버튼으로 삭제 가능하게)
@@ -84,7 +94,7 @@ export default function DragDrop({
     );
     setBlocks({ ...blocks, before: updatedBlocks });
   };
-  console.log(selectedBlocks);
+
   const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) {
       return;
@@ -308,6 +318,12 @@ export default function DragDrop({
           </DragDropContext>
         </Box>
       </div>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        onClick={handleRegisterTemplate}
+      >
+        Register Template
+      </button>
     </div>
   );
 }
