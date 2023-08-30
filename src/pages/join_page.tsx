@@ -3,7 +3,7 @@ import JoinComponent from "../components/joinComponent";
 import { useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { signUp } from "../lib/api";
-
+import { Link } from "react-router-dom";
 export default function JoinPage() {
   const StyledButton = styled.div`
     background-color: #ffa0a0;
@@ -116,14 +116,15 @@ export default function JoinPage() {
     companyType: "",
     email: "",
   });
-  const [cmpType, setCmpType] = useState("");
   const signUpBtn = () => signUp;
   return (
     <StyledJoin>
       <div>
-        <div className={"logo"}>
-          <img src="icon\Logo.png"></img>
-        </div>
+        <Link to={"/"}>
+          <div className={"logo"}>
+            <img src="icon\Logo.png"></img>
+          </div>
+        </Link>
         <div className={"join"}>회원가입</div>
 
         <div className={"joinCompo"}>

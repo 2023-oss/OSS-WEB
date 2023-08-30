@@ -14,6 +14,7 @@ import { Typography, Tabs, Tab, Box } from "@mui/material";
 import tabPanels from "../data/tab-panels";
 import tabs from "../data/tabs";
 import { RenderDraggable } from "./RenderDraggable";
+import { initialData } from "../data/initial-data";
 
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
@@ -44,7 +45,20 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
     </div>
   );
 };
-
+//블록 형식
+const SelectedBlockList = ({ selectedBlocks }: any) => {
+  return (
+    <div>
+      {selectedBlocks.map((block: any) => (
+        <div key={block.id}>
+          <h3>{block.category}</h3>
+          <p>{block.content}</p>
+          <p>예시: {block.ex}</p>
+        </div>
+      ))}
+    </div>
+  );
+};
 export default function DragDrop({
   blocks,
   setBlocks,
@@ -70,7 +84,7 @@ export default function DragDrop({
     );
     setBlocks({ ...blocks, before: updatedBlocks });
   };
-
+  console.log(selectedBlocks);
   const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) {
       return;
@@ -283,6 +297,13 @@ export default function DragDrop({
                   )}
                 </Droppable>
               ))}
+              <div
+                className={$(
+                  "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#fff]"
+                )}
+              >
+                <SelectedBlockList selectedBlocks={selectedBlocks} />
+              </div>
             </div>
           </DragDropContext>
         </Box>

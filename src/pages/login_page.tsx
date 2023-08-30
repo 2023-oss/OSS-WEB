@@ -102,9 +102,11 @@ export default function LoginPage() {
   return (
     <StyledLogin>
       <div>
-        <div className={"logo"}>
-          <img src="/icon/Logo.png"></img>
-        </div>
+        <Link to={"/"}>
+          <div className={"logo"}>
+            <img src="/icon/Logo.png"></img>
+          </div>
+        </Link>
         <div className={"input-box"}>
           <input
             type="text"

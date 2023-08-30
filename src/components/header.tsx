@@ -45,10 +45,11 @@ const StyledHeader = styled.header<{ active: number }>`
     align-items: center;
     flex: 1;
     padding-bottom: 0.75rem;
+
     span {
       cursor: pointer;
     }
-    span + span {
+    a + a {
       margin-left: 1rem;
     }
   }
@@ -63,7 +64,9 @@ export default function Header(props: HeaderProps) {
     <Wrapper>
       <StyledHeader active={props.active}>
         <div className="logo">
-          <img src="/icon/titleLogo.png"></img>
+          <Link to={"/"}>
+            <img src="/icon/titleLogo.png"></img>
+          </Link>
         </div>
         <div className="nav-list">
           <Link to={"/edit"} className="nav">
@@ -74,8 +77,12 @@ export default function Header(props: HeaderProps) {
           </Link>
         </div>
         <div className="account">
-          <Link to="/login">로그인</Link>
-          <Link to="/join">회원가입</Link>
+          <Link to="/login">
+            <span>로그인</span>
+          </Link>
+          <Link to="/join">
+            <span>회원가입</span>
+          </Link>
         </div>
       </StyledHeader>
     </Wrapper>
