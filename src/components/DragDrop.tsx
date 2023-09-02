@@ -16,10 +16,22 @@ import tabs from "../data/tabs";
 import { RenderDraggable } from "./RenderDraggable";
 import { registerTemplate } from "../lib/api";
 
+import { styled } from "styled-components";
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
 };
-
+const StyledButton = styled.div`
+  background-color: #ffa0a0;
+  width: 50%;
+  margin-top: 13px;
+  color: white;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 35px 0px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 4px rgb(0, 0, 0, 0.25);
+`;
 interface ExtendedDraggableChildrenFn extends DraggableChildrenFn {
   snapshot: DraggableStateSnapshot;
 }
@@ -42,6 +54,20 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
           {children}
         </Typography>
       )}
+    </div>
+  );
+};
+//블록 형식
+const SelectedBlockList = ({ selectedBlocks }: any) => {
+  return (
+    <div>
+      {selectedBlocks.map((block: any) => (
+        <div key={block.id}>
+          <h3>{block.category}</h3>
+          <p>{block.content}</p>
+          <p>예시: {block.ex}</p>
+        </div>
+      ))}
     </div>
   );
 };
@@ -81,6 +107,7 @@ export default function DragDrop({
     );
     setBlocks({ ...blocks, before: updatedBlocks });
   };
+
   const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) {
       return;
@@ -293,16 +320,20 @@ export default function DragDrop({
                   )}
                 </Droppable>
               ))}
+              <div
+                className={$(
+                  "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#fff]"
+                )}
+              >
+                <SelectedBlockList selectedBlocks={selectedBlocks} />
+              </div>
             </div>
           </DragDropContext>
         </Box>
       </div>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={handleRegisterTemplate}
-      >
-        Register Template
-      </button>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <StyledButton>Register Template</StyledButton>
+      </div>
     </div>
   );
 }

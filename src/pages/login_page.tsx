@@ -102,9 +102,11 @@ export default function LoginPage() {
   return (
     <StyledLogin>
       <div>
-        <div className={"logo"}>
-          <img src="/icon/Logo.png"></img>
-        </div>
+        <Link to={"/"}>
+          <div className={"logo"}>
+            <img src="/icon/Logo.png"></img>
+          </div>
+        </Link>
         <div className={"input-box"}>
           <input
             type="text"
@@ -133,7 +135,7 @@ export default function LoginPage() {
           <Link to={"/join"}>
             <span>회원 가입</span>
           </Link>
-          <Link to="/">
+          <Link to="/findid">
             <span>아이디 | 비밀번호 찾기</span>
           </Link>
         </div>
