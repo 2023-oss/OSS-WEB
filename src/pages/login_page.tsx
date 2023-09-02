@@ -135,7 +135,7 @@ export default function LoginPage() {
           <Link to={"/join"}>
             <span>회원 가입</span>
           </Link>
-          <Link to="/">
+          <Link to="/findid">
             <span>아이디 | 비밀번호 찾기</span>
           </Link>
         </div>
