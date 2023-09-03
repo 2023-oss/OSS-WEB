@@ -147,7 +147,6 @@ const SelectedBlockList = ({ selectedBlocks, editedContent }: any) => {
   );
 };
 
-
 export default function DragDrop({
   blocks,
   setBlocks,
@@ -161,7 +160,6 @@ export default function DragDrop({
   const [tabValue, setTabValue] = useState(0);
 
   const resetBlocks = () => {
-
     const updatedBeforeBlocks = blocks["before"].map((item) => ({
       ...item,
       isClicked: false,
@@ -175,8 +173,6 @@ export default function DragDrop({
       before: updatedBeforeBlocks,
       after: updatedAfterBlocks, // "after" 블록 초기화
     });
- blocks);
-
   };
 
   const handleRegisterTemplate = () => {
@@ -377,7 +373,6 @@ export default function DragDrop({
                                         snapshot={snapshot}
                                         item={item}
                                         index={index}
-
                                         handleContentChange={
                                           handleContentChange
                                         }
@@ -393,7 +388,6 @@ export default function DragDrop({
                         </>
                       ) : (
                         <>
-
                           <StyledPadding>
                             {blocks[key as BlockStatus].map((item, index) => (
                               <Draggable
@@ -419,7 +413,6 @@ export default function DragDrop({
                           {/* <StyledResetButton onClick={resetBlocks}>
                             Reset
                           </StyledResetButton> */}
-
                         </>
                       )}
                     </StyledDroppableContainer>

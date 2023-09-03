@@ -12,7 +12,7 @@ export const login = async ({
   password: string;
 }) => {
   try {
-    const response = await api.post({
+    const response = await api.post("/auth/login", {
       username: username,
       password: password,
     });

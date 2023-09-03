@@ -118,6 +118,7 @@ export default function JoinPage() {
   const [company, setCompany] = useState("");
   const [companyType, setCompanyType] = useState("");
   const [email, setEmail] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleIdChange = (e: any) => {
     setUserId(e.target.value);
@@ -136,6 +137,10 @@ export default function JoinPage() {
   };
   const handleUserNameChange = (e: any) => {
     setUserName(e.target.value);
+  };
+  const handleFileChange = (e: any) => {
+    const file = e.target.files[0];
+    setSelectedFile(file);
   };
 
   return (
@@ -245,6 +250,15 @@ export default function JoinPage() {
             </div>
           </div>
           <hr></hr>
+        </div>
+      </div>
+
+      <div className={"joinCompo"}>
+        <div className={"joinBar"}>
+          <div className={"name"}>기업명</div>
+          <div className={"content"}>
+            <input type="file" onChange={handleFileChange} accept="image/*" />
+          </div>
         </div>
       </div>
 
