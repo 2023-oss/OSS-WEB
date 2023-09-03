@@ -366,9 +366,9 @@ export default function DragDrop({
                             ))}
                             {provided.placeholder}
                           </StyledPadding>
-                          <StyledResetButton onClick={resetBlocks}>
+                          {/* <StyledResetButton onClick={resetBlocks}>
                             Reset
-                          </StyledResetButton>
+                          </StyledResetButton> */}
                         </>
                       )}
                     </StyledDroppableContainer>
