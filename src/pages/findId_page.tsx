@@ -27,7 +27,14 @@ export default function FindIdPage() {
       height: 32px;
     }
 
-    .name {
+    .nameBar label {
+      width: 160px;
+
+      margin-bottom: 24px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .phoneBar label {
       width: 160px;
       margin-bottom: 24px;
       font-size: 24px;
@@ -39,9 +46,14 @@ export default function FindIdPage() {
 
       margin-bottom: 24px;
     }
-    .nameBar {
+    .nameBar .phoneBar .verBar {
       display: flex;
-      justify-content: center;
+    }
+    .nameBar {
+      margin-left: 50px;
+    }
+    .phoneBar {
+      margin-left: 50px;
     }
     .pwTitle {
       display: flex;
@@ -56,10 +68,52 @@ export default function FindIdPage() {
       font-size: 20px;
       margin-top: 12px;
     }
+    .nameBar input {
+      margin-top: 42px;
+      height: 51px;
+      width: 50%;
+      font-size: 24px;
+      outline: none;
+      border: solid grey;
+      padding: 27px 22px;
+      border-color: none;
+    }
+    .phoneBar input {
+      margin-top: 42px;
+      height: 51px;
+      width: 50%;
+      font-size: 24px;
+      outline: none;
+      border: solid grey;
+      padding: 27px 22px;
+      border-color: none;
+    }
+    .verBar input {
+      margin-top: 42px;
+      height: 51px;
+      width: 50%;
+      font-size: 24px;
+      outline: none;
+      background-color: #d9d9d9;
+      border: solid grey;
+      padding: 27px 22px;
+      margin-left: 216px;
+    }
+    hr {
+      margin-top: 71px;
+      border-width: 0.5px;
+      border-color: black;
+    }
   `;
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [verificationCode, setVerificationCode] = useState("");
 
+  const handleVerifyCode = () => {
+    //서버로 데이터 post
+  };
   const handleEmailChange = (event: any) => {
     setEmail(event.target.value);
   };
@@ -76,19 +130,86 @@ export default function FindIdPage() {
         <input type="radio"></input>
         <h1>회원정보에 등록한 휴대전화로 인증</h1>
       </div>
+
       <div className={"nameBar"}>
-        <div className={"name"}>이름</div>
-        <div className={"content"}>
-          <input placeholder="이름을 입력하세요" type="text"></input>
-        </div>
+        <label>이름</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
       </div>
-      <div>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={handleEmailChange} />
+      <div className={"phoneBar"}>
+        <label>전화번호</label>
+        <input
+          type="text"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <button
+          style={{
+            backgroundColor: "#D9D9D9",
+            padding: "10px",
+            marginLeft: "24px",
+            height: "51px",
+            fontSize: "20px",
+          }}
+          onClick={handleVerifyCode}
+        >
+          인증번호 받기
+        </button>
       </div>
-      <div className={"etc"}>
-        <input type="checkbox"></input>
-        자동 로그인
+
+      <div className={"verBar"}>
+        <input
+          type="text"
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
+          placeholder="인증번호 6자리 숫자 입력"
+        />
+      </div>
+      <hr />
+      <div className={"input-radio"}>
+        <input type="radio"></input>
+        <h1>본인확인 이메일로 인증</h1>
+      </div>
+
+      <div className={"nameBar"}>
+        <label>이름</label>
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </div>
+      <div className={"phoneBar"}>
+        <label>이메일 주소</label>
+        <input
+          type="text"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <button
+          style={{
+            backgroundColor: "#D9D9D9",
+            padding: "10px",
+            marginLeft: "24px",
+            height: "51px",
+            fontSize: "20px",
+          }}
+          onClick={handleVerifyCode}
+        >
+          인증번호 받기
+        </button>
+      </div>
+
+      <div className={"verBar"}>
+        <input
+          type="text"
+          value={verificationCode}
+          onChange={(e) => setVerificationCode(e.target.value)}
+          placeholder="인증번호 6자리 숫자 입력"
+        />
       </div>
     </StyledFind>
   );
