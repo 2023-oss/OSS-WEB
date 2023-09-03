@@ -391,9 +391,9 @@ export default function DragDrop({
                             ))}
                             {provided.placeholder}
                           </StyledPadding>
-                          {/* <StyledResetButton onClick={resetBlocks}>
+                          <StyledResetButton onClick={resetBlocks}>
                             Reset
-                          </StyledResetButton> */}
+                          </StyledResetButton>
                         </>
                       )}
                     </StyledDroppableContainer>
@@ -404,7 +404,7 @@ export default function DragDrop({
                 <SelectedBlockList
                   selectedBlocks={selectedBlocks}
                   formDataSet={formDataSet}
-                  /*setFormDataSet={setFormDataSet}*/
+                  setFormDataSet={setFormDataSet}
                 />
               </StyledDroppableContainer>
             </StyledGridContainer>

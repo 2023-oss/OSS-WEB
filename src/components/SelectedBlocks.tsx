@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Block } from "./CustomBlocks";
 import { registerTemplate } from "../lib/api";
 import { Dispatch, SetStateAction } from "react";
+import { useEffect } from "react";
 interface SelectedBlockProps extends React.ComponentPropsWithRef<"div"> {
   selectedBlocks: Block[];
   formDataSet: {
@@ -12,14 +13,7 @@ interface SelectedBlockProps extends React.ComponentPropsWithRef<"div"> {
     paymentBlock: any[];
     etcBlock: any[];
   };
-  //   setFormDataSet: {
-  //     defaultBlock: any[];
-  //     personalinfoBlock: any[];
-  //     safetyBlock: any[];
-  //     responsibilityBlock: any[];
-  //     paymentBlock: any[];
-  //     etcBlock: any[];
-  //   };
+  setFormDataSet: Function;
 }
 
 export default function SelectedBlockList(props: SelectedBlockProps) {
@@ -38,6 +32,18 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
     paymentBlock: [],
     etcBlock: [],
   });
+  useEffect(() => {
+    const newFormDataSet = {
+      defaultBlock: [],
+      personalinfoBlock: [],
+      safetyBlock: [],
+      responsibilityBlock: [],
+      paymentBlock: [],
+      etcBlock: [],
+    };
+
+    setFormDataSet(newFormDataSet);
+  }, [props.selectedBlocks]);
 
   for (let i = 0; i < props.selectedBlocks.length; i++) {
     if (props.selectedBlocks[i].category === "safety") {
