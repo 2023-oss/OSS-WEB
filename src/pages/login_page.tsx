@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import axios from "axios";
 import { login } from "../lib/api";
@@ -70,6 +70,7 @@ const StyledLogin = styled.div`
 `;
 
 export default function LoginPage() {
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [autoLogin, setAutoLogin] = useState(false);
@@ -85,7 +86,21 @@ export default function LoginPage() {
     setAutoLogin(e.target.checked); // 체크박스 상태 업데이트
   };
 
-  const loginBtn = () => login;
+  const loginBtn = () => {
+    const loginUser = {
+      username: username,
+      password: password,
+    };
+    login(loginUser)
+      .then((res) => {
+        console.log(res.data);
+        alert("로그인에 성공했습니다.");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Error:", err);
+      });
+  };
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
