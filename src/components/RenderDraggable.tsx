@@ -1,7 +1,7 @@
 import { DraggableProvided, DraggableStateSnapshot } from "react-beautiful-dnd";
 import { Block } from "./CustomBlocks";
 import { styled } from "styled-components";
-
+import { useState } from "react";
 const StyledInput = styled.input`
   width: 100%; /* 너비는 부모 요소의 크기에 맞게 */
   min-height: 30px; /* 최소 높이 */
@@ -13,6 +13,11 @@ const StyledDiv = styled.div`
   display: flex;
   flex-direction: column;
 `;
+// const [textHandle, settextHandle] = useState("");
+// const handleContentChange = (content : any, index : any) = {
+
+//   settextHandle(textHandle);
+// }
 interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
   provided: DraggableProvided;
   snapshot: DraggableStateSnapshot;
@@ -44,6 +49,9 @@ export function RenderDraggable(props: RenderDraggableProps) {
         <StyledInput
           type="text"
           value={props.item.content}
+          onClick={() => {
+            console.log("hi");
+          }}
           onChange={(e) =>
             props.handleContentChange(e.target.value, props.index)
           }

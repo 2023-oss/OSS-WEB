@@ -21,7 +21,7 @@ export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
 };
 const StyledButton = styled.div`
-  background-color: #ffa0a0;
+  background-color: #d9d9d9;
   width: 50%;
   margin-top: 13px;
   color: white;
