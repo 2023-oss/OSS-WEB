@@ -6,7 +6,7 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
 const StyledInput = styled.input`
-  width: 100%; /* 너비는 부모 요소의 크기에 맞게 */
+  width: 90%; /* 너비는 부모 요소의 크기에 맞게 */
   min-height: 30px; /* 최소 높이 */
   padding: 5px;
   box-sizing: border-box;

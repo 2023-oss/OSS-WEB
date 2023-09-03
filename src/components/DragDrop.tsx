@@ -17,7 +17,7 @@ import { RenderDraggable } from "./RenderDraggable";
 import { registerTemplate } from "../lib/api";
 import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
-
+import SelectedBlockList from "./SelectedBlocks";
 import { styled } from "styled-components";
 
 export const $ = (...classnames: any[]) => {
@@ -132,21 +132,6 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
   );
 };
 
-//블록 형식
-const SelectedBlockList = ({ selectedBlocks, editedContent }: any) => {
-  return (
-    <div>
-      {selectedBlocks.map((block: any) => (
-        <div key={block.id}>
-          <h3>{block.category}</h3>
-          <p>{block.content}</p>
-          <p>예시: {block.ex}</p>
-        </div>
-      ))}
-    </div>
-  );
-};
-
 export default function DragDrop({
   blocks,
   setBlocks,
@@ -158,7 +143,14 @@ export default function DragDrop({
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
-
+  const [formDataSet, setFormDataSet] = useState({
+    defaultBlock: [],
+    personalinfoBlock: [],
+    safetyBlock: [],
+    responsibilityBlock: [],
+    paymentBlock: [],
+    etcBlock: [],
+  });
   const resetBlocks = () => {
     const updatedBeforeBlocks = blocks["before"].map((item) => ({
       ...item,
@@ -175,19 +167,10 @@ export default function DragDrop({
     });
   };
 
-  const handleRegisterTemplate = () => {
-    registerTemplate(selectedBlocks)
-      .then((res) => {
-        console.log(res.data);
-      })
-      .catch((err) => {
-        console.error("Error:", err.response.data.message);
-      });
-  };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
+  console.log(selectedBlocks);
   const toggleSelect = (clickedBlock: Block) => {
     // 무조건 before 상태일 때만 선택 가능
     // after 상태일 때 선택 불가(버튼으로 삭제 가능하게)
@@ -228,7 +211,6 @@ export default function DragDrop({
     else {
       // 이동시키기 전
       const newBlocks = { ...blocks };
-      console.log("before : ", newBlocks);
 
       const movedBlocks = blocks["before"].filter((item) => item.isClicked);
       if (movedBlocks.length > 0) {
@@ -257,7 +239,6 @@ export default function DragDrop({
         //splice(start: number - 시작 인덱스, deleteCount: number -삭제할 요소의 수, ...items: T[] - 추가될 요소): T[];
       }
 
-      console.log("after : ", newBlocks);
       setBlocks(newBlocks);
       setSelectedBlocks(newBlocks["after"]);
     }
@@ -420,11 +401,11 @@ export default function DragDrop({
                 </Droppable>
               ))}
               <StyledDroppableContainer>
-                {/* <SelectedBlockList
+                <SelectedBlockList
                   selectedBlocks={selectedBlocks}
-
-                  editedContent={editedContent}
-                /> */}
+                  formDataSet={formDataSet}
+                  /*setFormDataSet={setFormDataSet}*/
+                />
               </StyledDroppableContainer>
             </StyledGridContainer>
           </DragDropContext>
@@ -462,6 +443,7 @@ export default function DragDrop({
                   </div>
                 ))}
               </div>
+              <button>Submit Template</button>
             </Typography>
           </Box>
         </Modal>
