@@ -19,6 +19,7 @@ import Modal from "@mui/material/Modal";
 import Button from "@mui/material/Button";
 
 import { styled } from "styled-components";
+
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
 };
@@ -36,17 +37,75 @@ const style = {
   border: "none",
 };
 const StyledButton = styled.div`
-  background-color: #d9d9d9;
-  width: 50%;
-  margin-top: 13px;
+  background-color: #5fc1df;
+  width: 300px;
+  height: 80px;
+  margin: 30px;
   color: white;
   text-align: center;
-  font-size: 32px;
+  font-size: 25px;
   font-weight: bold;
-  padding: 35px 0px;
+  padding-top: 23px;
   border-radius: 10px;
   box-shadow: 6px 6px 4px rgb(0, 0, 0, 0.25);
+  &:hover {
+    background-color: #489db5;
+  }
+
+  &:active {
+    background-color: #357a92;
+  }
 `;
+const StyledResetButton = styled.div`
+  position: absolute;
+  bottom: 0px;
+  left: 45%;
+  transform: translateX(-50%); // button을 중앙 정렬
+  background-color: #5fc1df;
+  width: 100px;
+  height: 30px;
+  margin: 30px;
+  color: white;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  padding-top: 3px;
+  border-radius: 5px;
+  &:hover {
+    background-color: #489db5;
+  }
+
+  &:active {
+    background-color: #357a92;
+  }
+`;
+const StyledGridContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  flex: 1;
+  user-select: none;
+  border-radius: 0.5rem;
+`;
+const StyledDroppableContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  /*gap: 0.75rem; /* Adjust the gap value as needed */
+  /*border-radius: 1rem; /* Adjust the border-radius as needed */
+  background-color: #eae7e780; /* Set your desired background color */
+  padding: 1rem;
+  /*border: 1px solid #ccc; /* Set your desired border color */
+  transition: box-shadow 0.3s ease; /* Add the desired transition effect */
+
+  &.isDraggingOver {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+`;
+const StyledPadding = styled.div`
+  padding: 24px;
+`;
+
 interface ExtendedDraggableChildrenFn extends DraggableChildrenFn {
   snapshot: DraggableStateSnapshot;
 }
@@ -72,6 +131,7 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
     </div>
   );
 };
+
 //블록 형식
 const SelectedBlockList = ({ selectedBlocks, editedContent }: any) => {
   return (
@@ -87,6 +147,7 @@ const SelectedBlockList = ({ selectedBlocks, editedContent }: any) => {
   );
 };
 
+
 export default function DragDrop({
   blocks,
   setBlocks,
@@ -98,7 +159,9 @@ export default function DragDrop({
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
+
   const resetBlocks = () => {
+
     const updatedBeforeBlocks = blocks["before"].map((item) => ({
       ...item,
       isClicked: false,
@@ -112,7 +175,10 @@ export default function DragDrop({
       before: updatedBeforeBlocks,
       after: updatedAfterBlocks, // "after" 블록 초기화
     });
+ blocks);
+
   };
+
   const handleRegisterTemplate = () => {
     registerTemplate(selectedBlocks)
       .then((res) => {
@@ -174,6 +240,7 @@ export default function DragDrop({
           ...movedBlocks,
           id: `block-${Date.now()}`,
           isClicked: false,
+          status: "after" as BlockStatus,
         }));
         newBlocks[destinationKey].splice(destination.index, 0, ...copiedBlocks);
         newBlocks[sourceKey].forEach((block) => {
@@ -187,6 +254,7 @@ export default function DragDrop({
         const copiedBlock = {
           ...movedBlock,
           id: `block-${Date.now()}`,
+          status: "after" as BlockStatus,
         };
         // Blocks에 copiedBlock 저장
         newBlocks[destinationKey].splice(destination.index, 0, copiedBlock);
@@ -246,7 +314,12 @@ export default function DragDrop({
 
     setBlocks({ ...blocks, after: updatedBlocks });
   };
-  console.log(selectedBlocks);
+
+  const handleDeleteBlock = (index: number) => {
+    const newBlocks = blocks.after.filter((block) => block.index !== index);
+    setBlocks({ ...blocks, after: newBlocks });
+    setSelectedBlocks(newBlocks);
+  };
 
   return (
     <div className="p-4">
@@ -268,16 +341,16 @@ export default function DragDrop({
             ))}
           </Tabs>
           <DragDropContext onDragEnd={handleDragEnd}>
-            <div className="grid flex-1 select-none grid-cols-3 gap-4 rounded-lg">
+            {/* className="grid flex-1 select-none grid-cols-3 gap-4 rounded-lg" */}
+            <StyledGridContainer>
               {Object.keys(blocks).map((key) => (
                 <Droppable key={key} droppableId={key}>
                   {(provided, snapshot) => (
-                    <div
+                    <StyledDroppableContainer
                       ref={provided.innerRef}
                       {...provided.droppableProps}
                       className={$(
-                        "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#fff]",
-                        snapshot.isDraggingOver ? "shadow-lg" : "shadow"
+                        snapshot.isDraggingOver ? "isDraggingOver" : ""
                       )}
                     >
                       <span className="text-xs font-semibold">
@@ -304,14 +377,11 @@ export default function DragDrop({
                                         snapshot={snapshot}
                                         item={item}
                                         index={index}
-                                        // editedContent={editedContent}
+
                                         handleContentChange={
                                           handleContentChange
                                         }
-                                        className={getCardClassName(
-                                          snapshot,
-                                          item.category
-                                        )}
+                                        handleDeleteBlock={handleDeleteBlock}
                                         toggleSelect={toggleSelect}
                                       ></RenderDraggable>
                                     )}
@@ -323,48 +393,47 @@ export default function DragDrop({
                         </>
                       ) : (
                         <>
-                          {blocks[key as BlockStatus].map((item, index) => (
-                            <Draggable
-                              key={item.id}
-                              draggableId={item.id}
-                              index={item.index}
-                            >
-                              {(provided, snapshot) => (
-                                <RenderDraggable
-                                  provided={provided}
-                                  snapshot={snapshot}
-                                  item={item}
-                                  index={index}
-                                  handleContentChange={handleContentChange}
-                                  // editedContent={editedContent}
-                                  className={getCardClassName(
-                                    snapshot,
-                                    item.category
-                                  )}
-                                  toggleSelect={toggleSelect}
-                                ></RenderDraggable>
-                              )}
-                            </Draggable>
-                          ))}
-                          {provided.placeholder}
-                          <button onClick={resetBlocks}>Reset</button>
+
+                          <StyledPadding>
+                            {blocks[key as BlockStatus].map((item, index) => (
+                              <Draggable
+                                key={item.id}
+                                draggableId={item.id}
+                                index={item.index}
+                              >
+                                {(provided, snapshot) => (
+                                  <RenderDraggable
+                                    provided={provided}
+                                    snapshot={snapshot}
+                                    item={item}
+                                    index={index}
+                                    handleContentChange={handleContentChange}
+                                    handleDeleteBlock={handleDeleteBlock}
+                                    toggleSelect={toggleSelect}
+                                  ></RenderDraggable>
+                                )}
+                              </Draggable>
+                            ))}
+                            {provided.placeholder}
+                          </StyledPadding>
+                          {/* <StyledResetButton onClick={resetBlocks}>
+                            Reset
+                          </StyledResetButton> */}
+
                         </>
                       )}
-                    </div>
+                    </StyledDroppableContainer>
                   )}
                 </Droppable>
               ))}
-              <div
-                className={$(
-                  "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#fff]"
-                )}
-              >
-                <SelectedBlockList
+              <StyledDroppableContainer>
+                {/* <SelectedBlockList
                   selectedBlocks={selectedBlocks}
-                  // editedContent={editedContent}
-                />
-              </div>
-            </div>
+
+                  editedContent={editedContent}
+                /> */}
+              </StyledDroppableContainer>
+            </StyledGridContainer>
           </DragDropContext>
         </Box>
       </div>

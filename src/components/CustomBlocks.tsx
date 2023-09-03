@@ -10,7 +10,7 @@ export type Block = {
   isClicked: boolean;
   category: string;
   content: string;
-  ex: string;
+  question: string;
   index: number;
 };
 
