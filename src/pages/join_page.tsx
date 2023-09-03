@@ -112,18 +112,32 @@ const StyledJoin = styled.div`
 const signUpBtn = () => signUp;
 
 export default function JoinPage() {
-  const [formData, setFormData] = useState({
-    userId: "",
-    pw: "",
-    userName: "",
-    company: "",
-    companyType: "",
-    email: "",
-  });
-  const handleFormChange = (e: any) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const [userId, setUserId] = useState("");
+  const [pw, setPw] = useState("");
+  const [userName, setUserName] = useState("");
+  const [company, setCompany] = useState("");
+  const [companyType, setCompanyType] = useState("");
+  const [email, setEmail] = useState("");
+
+  const handleIdChange = (e: any) => {
+    setUserId(e.target.value);
   };
+  const handlePwChange = (e: any) => {
+    setPw(e.target.value);
+  };
+  const handleCmpChange = (e: any) => {
+    setCompany(e.target.value);
+  };
+  const handleCmpTypeChange = (e: any) => {
+    setCompanyType(e.target.value);
+  };
+  const handleEmailChange = (e: any) => {
+    setEmail(e.target.value);
+  };
+  const handleUserNameChange = (e: any) => {
+    setUserName(e.target.value);
+  };
+
   return (
     <StyledJoin>
       <div>
@@ -141,8 +155,8 @@ export default function JoinPage() {
               <input
                 type="text"
                 placeholder="이름을 입력하세요"
-                value={formData.userName}
-                onChange={handleFormChange}
+                value={userName}
+                onChange={handleUserNameChange}
               ></input>
             </div>
           </div>
@@ -153,9 +167,10 @@ export default function JoinPage() {
             <div className={"name"}>아이디</div>
             <div className={"content"}>
               <input
+                type="text"
                 placeholder="6~12자의 영문, 숫자만 사용 가능합니다"
-                value={formData.userId}
-                onChange={handleFormChange}
+                value={userId}
+                onChange={handleIdChange}
               ></input>
             </div>
           </div>
@@ -166,9 +181,10 @@ export default function JoinPage() {
             <div className={"name"}>비밀번호</div>
             <div className={"content"}>
               <input
+                type="text"
                 placeholder="8~20자의 숫자, 특수문자, 영문자만 사용 가능합니다"
-                value={formData.pw}
-                onChange={handleFormChange}
+                value={pw}
+                onChange={handlePwChange}
               ></input>
             </div>
           </div>
@@ -180,8 +196,9 @@ export default function JoinPage() {
             <div className={"name"}>기업명</div>
             <div className={"content"}>
               <input
-                value={formData.company}
-                onChange={handleFormChange}
+                type="text"
+                value={company}
+                onChange={handleCmpChange}
               ></input>
             </div>
           </div>
@@ -197,9 +214,10 @@ export default function JoinPage() {
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  value={formData.companyType}
+                  type="text"
+                  value={companyType}
                   label="Type"
-                  onChange={handleFormChange}
+                  onChange={handleCmpTypeChange}
                 >
                   <MenuItem value={10}>레저</MenuItem>
                   <MenuItem value={20}>산악등반</MenuItem>
@@ -219,9 +237,10 @@ export default function JoinPage() {
             <div className={"name"}>이메일</div>
             <div className={"content"}>
               <input
+                type="text"
                 placeholder="xxxx@.com의 형식으로 입력해주세요"
-                value={formData.email}
-                onChange={handleFormChange}
+                value={email}
+                onChange={handleEmailChange}
               ></input>
             </div>
           </div>

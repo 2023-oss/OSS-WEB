@@ -8,7 +8,7 @@ export const initialData: Block[] = [
     category: "personal-info",
     content:
       "제공하신 정보는 해당 업체 이용정보 및 공지사항 전달, 이벤트 관련 정보 제공 등을 위해 사용합니다.",
-    ex: "예시",
+    ex: "",
     index: 0,
   },
   {
