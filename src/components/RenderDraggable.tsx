@@ -23,7 +23,7 @@ interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
   snapshot: DraggableStateSnapshot;
   item: Block;
   index: number;
-  editedContent: string;
+  // editedContent: string;
   handleContentChange: (ex: string, index: number) => void;
   className: string;
   toggleSelect: (clickedBlock: Block) => void;
@@ -31,7 +31,7 @@ interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
 
 export function RenderDraggable(props: RenderDraggableProps) {
   const [editedContent, setEditedContent] = useState(props.item.content);
-
+  console.log(editedContent);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newContent = e.target.value;
     setEditedContent(newContent);

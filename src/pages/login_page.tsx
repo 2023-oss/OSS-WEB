@@ -4,6 +4,7 @@ import axios from "axios";
 import { login } from "../lib/api";
 import { log } from "console";
 import { useState } from "react";
+import { useEffect } from "react";
 const StyledButton = styled.div`
   background-color: #ffa0a0;
   width: 100%;
@@ -69,18 +70,9 @@ const StyledLogin = styled.div`
 `;
 
 export default function LoginPage() {
-  // const loginBtn = async () => {
-  //   const username = "eunsol";
-  //   const password = "123123";
-  //   try {
-  //     const res = await login({ username, password });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [autoLogin, setAutoLogin] = useState(false);
 
   const handleUsernameChange = (e: any) => {
     setUsername(e.target.value);
@@ -88,15 +80,51 @@ export default function LoginPage() {
   const handlePasswordChange = (e: any) => {
     setPassword(e.target.value);
   };
+
+  const handleAutoLoginChange = (e: any) => {
+    setAutoLogin(e.target.checked); // 체크박스 상태 업데이트
+  };
+
   const loginBtn = () => login;
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
     // 여기서 로그인 정보를 서버로 보내는 작업 수행
-
+    loginBtn();
     console.log("사용자명 :", username);
     console.log("비번 :", password);
+
+    if (autoLogin) {
+      // 자동 로그인이 활성화되어 있을 경우
+      try {
+        const response = await login({ username, password });
+        const userData = response.data;
+
+        // 사용자 정보를 로컬 스토리지에 저장
+        localStorage.setItem("userData", JSON.stringify(userData));
+      } catch (error) {
+        console.error("자동 로그인 오류:", error);
+      }
+    }
   };
+
+  useEffect(() => {
+    const savedUserData = localStorage.getItem("userData");
+
+    if (savedUserData && autoLogin) {
+      const userData = JSON.parse(savedUserData);
+
+      // 서버에 저장된 로그인 정보를 사용하여 자동 로그인
+      login(userData)
+        .then((response) => {
+          // 로그인 성공 후 다음 작업 수행
+          // 예: 사용자를 대시보드 페이지로 리디렉션
+        })
+        .catch((error) => {
+          console.error("자동 로그인 오류:", error);
+        });
+    }
+  }, [autoLogin]);
   console.log(username, password);
   return (
     <StyledLogin>
@@ -123,7 +151,7 @@ export default function LoginPage() {
           ></input>
         </div>
         <div className={"etc"}>
-          <input type="checkbox"></input>
+          <input type="checkbox" onChange={handleAutoLoginChange}></input>
           자동 로그인
         </div>
 

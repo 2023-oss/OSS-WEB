@@ -110,7 +110,10 @@ export default function FindIdPage() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
-
+  const handleSubmit = () => {
+    // 여기에서 사용자가 입력한 인증 코드와 다른 정보를 사용하여 비밀번호를 찾는 로직을 구현하세요.
+    // 서버와의 통신을 통해 비밀번호를 초기화하거나, 사용자에게 비밀번호를 표시하는 등의 작업을 수행하세요.
+  };
   const handleVerifyCode = () => {
     //서버로 데이터 post
   };

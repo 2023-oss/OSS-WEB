@@ -15,10 +15,25 @@ import tabPanels from "../data/tab-panels";
 import tabs from "../data/tabs";
 import { RenderDraggable } from "./RenderDraggable";
 import { registerTemplate } from "../lib/api";
+import Modal from "@mui/material/Modal";
+import Button from "@mui/material/Button";
 
 import { styled } from "styled-components";
 export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
+};
+
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 800,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: 13,
+  border: "none",
 };
 const StyledButton = styled.div`
   background-color: #d9d9d9;
@@ -64,7 +79,7 @@ const SelectedBlockList = ({ selectedBlocks, editedContent }: any) => {
       {selectedBlocks.map((block: any) => (
         <div key={block.id}>
           <h3>{block.category}</h3>
-          <p>{editedContent}</p>
+          <p>{block.content}</p>
           <p>예시: {block.ex}</p>
         </div>
       ))}
@@ -84,7 +99,19 @@ export default function DragDrop({
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
   const resetBlocks = () => {
-    setSelectedBlocks([]);
+    const updatedBeforeBlocks = blocks["before"].map((item) => ({
+      ...item,
+      isClicked: false,
+    }));
+
+    // "after" 블록 초기화
+    const updatedAfterBlocks: any = [];
+
+    setBlocks({
+      ...blocks,
+      before: updatedBeforeBlocks,
+      after: updatedAfterBlocks, // "after" 블록 초기화
+    });
   };
   const handleRegisterTemplate = () => {
     registerTemplate(selectedBlocks)
@@ -95,6 +122,9 @@ export default function DragDrop({
         console.error("Error:", err.response.data.message);
       });
   };
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const toggleSelect = (clickedBlock: Block) => {
     // 무조건 before 상태일 때만 선택 가능
@@ -217,6 +247,7 @@ export default function DragDrop({
     setBlocks({ ...blocks, after: updatedBlocks });
   };
   console.log(selectedBlocks);
+
   return (
     <div className="p-4">
       {/* <div className="mb-2">
@@ -273,7 +304,7 @@ export default function DragDrop({
                                         snapshot={snapshot}
                                         item={item}
                                         index={index}
-                                        editedContent={editedContent}
+                                        // editedContent={editedContent}
                                         handleContentChange={
                                           handleContentChange
                                         }
@@ -305,7 +336,7 @@ export default function DragDrop({
                                   item={item}
                                   index={index}
                                   handleContentChange={handleContentChange}
-                                  editedContent={editedContent}
+                                  // editedContent={editedContent}
                                   className={getCardClassName(
                                     snapshot,
                                     item.category
@@ -330,7 +361,7 @@ export default function DragDrop({
               >
                 <SelectedBlockList
                   selectedBlocks={selectedBlocks}
-                  editedContent={editedContent}
+                  // editedContent={editedContent}
                 />
               </div>
             </div>
@@ -338,7 +369,40 @@ export default function DragDrop({
         </Box>
       </div>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <StyledButton>Register Template</StyledButton>
+        <StyledButton onClick={handleOpen}>Register Template</StyledButton>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              component="h2"
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                fontWeight: "bold",
+                fontSize: "25px",
+              }}
+            >
+              작성된 동의서
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <div>
+                {selectedBlocks.map((block: any) => (
+                  <div key={block.id}>
+                    <h3>{block.category}</h3>
+                    <p>{block.content}</p>
+                    <p>예시: {block.ex}</p>
+                  </div>
+                ))}
+              </div>
+            </Typography>
+          </Box>
+        </Modal>
       </div>
     </div>
   );
