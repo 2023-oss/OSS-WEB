@@ -83,7 +83,9 @@ export default function DragDrop({
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
-
+  const resetBlocks = () => {
+    setSelectedBlocks([]);
+  };
   const handleRegisterTemplate = () => {
     registerTemplate(selectedBlocks)
       .then((res) => {
@@ -216,7 +218,7 @@ export default function DragDrop({
 
     setBlocks({ ...blocks, after: updatedBlocks });
   };
-
+  console.log(selectedBlocks);
   return (
     <div className="p-4">
       {/* <div className="mb-2">
@@ -314,6 +316,7 @@ export default function DragDrop({
                             </Draggable>
                           ))}
                           {provided.placeholder}
+                          <button onClick={resetBlocks}>Reset</button>
                         </>
                       )}
                     </div>
