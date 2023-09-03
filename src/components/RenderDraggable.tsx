@@ -23,6 +23,7 @@ interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
   snapshot: DraggableStateSnapshot;
   item: Block;
   index: number;
+  editedContent: string;
   handleContentChange: (ex: string, index: number) => void;
   className: string;
   toggleSelect: (clickedBlock: Block) => void;
@@ -53,6 +54,7 @@ export function RenderDraggable(props: RenderDraggableProps) {
       {props.item.category === "default" ? (
         <span className="font-semibold">{props.item.ex} : </span>
       ) : null}
+
       <StyledDiv>
         <StyledInput
           type="text"
