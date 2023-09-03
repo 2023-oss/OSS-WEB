@@ -58,13 +58,13 @@ const TabPanel: React.FC<TabPanelProps> = ({ value, index, children }) => {
   );
 };
 //블록 형식
-const SelectedBlockList = ({ selectedBlocks }: any) => {
+const SelectedBlockList = ({ selectedBlocks, editedContent }: any) => {
   return (
     <div>
       {selectedBlocks.map((block: any) => (
         <div key={block.id}>
           <h3>{block.category}</h3>
-          <p>{block.content}</p>
+          <p>{editedContent}</p>
           <p>예시: {block.ex}</p>
         </div>
       ))}
@@ -166,7 +166,6 @@ export default function DragDrop({
       console.log("after : ", newBlocks);
       setBlocks(newBlocks);
       setSelectedBlocks(newBlocks["after"]);
-      console.log("selected blocks", selectedBlocks);
     }
   };
 
@@ -207,7 +206,6 @@ export default function DragDrop({
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
     setTabValue(newValue);
   };
-
   const handleContentChange = (content: string, index: number) => {
     // content 변경을 위한 로직
     console.log(index, content);
@@ -275,6 +273,7 @@ export default function DragDrop({
                                         snapshot={snapshot}
                                         item={item}
                                         index={index}
+                                        editedContent={editedContent}
                                         handleContentChange={
                                           handleContentChange
                                         }
@@ -306,6 +305,7 @@ export default function DragDrop({
                                   item={item}
                                   index={index}
                                   handleContentChange={handleContentChange}
+                                  editedContent={editedContent}
                                   className={getCardClassName(
                                     snapshot,
                                     item.category
@@ -328,7 +328,10 @@ export default function DragDrop({
                   "flex flex-col gap-3 rounded-xl bg-gray-200 p-4 ring-1 ring-gray-300 transition-shadow dark:bg-[#fff]"
                 )}
               >
-                <SelectedBlockList selectedBlocks={selectedBlocks} />
+                <SelectedBlockList
+                  selectedBlocks={selectedBlocks}
+                  editedContent={editedContent}
+                />
               </div>
             </div>
           </DragDropContext>
