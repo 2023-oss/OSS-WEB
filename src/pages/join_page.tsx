@@ -3,7 +3,7 @@ import JoinComponent from "../components/joinComponent";
 import { useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { signUp } from "../lib/api";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const StyledButton = styled.div`
   background-color: #ffa0a0;
@@ -109,16 +109,15 @@ const StyledJoin = styled.div`
   }
 `;
 
-const signUpBtn = () => signUp;
-
 export default function JoinPage() {
+  const navigate = useNavigate();
   const [userId, setUserId] = useState("");
   const [pw, setPw] = useState("");
   const [userName, setUserName] = useState("");
   const [company, setCompany] = useState("");
   const [companyType, setCompanyType] = useState("");
   const [email, setEmail] = useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState();
 
   const handleIdChange = (e: any) => {
     setUserId(e.target.value);
@@ -141,6 +140,42 @@ export default function JoinPage() {
   const handleFileChange = (e: any) => {
     const file = e.target.files[0];
     setSelectedFile(file);
+  };
+
+  const join = () => {
+    const formData = new FormData();
+    if (selectedFile) {
+      formData.append("img", selectedFile);
+    } else {
+      alert("브랜드 이미지를 선택해주세요.");
+    }
+    console.log("selectedFile=>", selectedFile);
+
+    const user = {
+      userId: userId,
+      pw: pw,
+      userName: userName,
+      company: company,
+      companyType: companyType,
+      email: email,
+    };
+    formData.append(
+      "user",
+      new Blob([JSON.stringify(user)], { type: "application/json" })
+    );
+    console.log("user=>", user);
+
+    console.log("formData=>", formData);
+
+    signUp(formData)
+      .then((res) => {
+        console.log(res.data);
+        alert("회원가입에 성공했습니다.");
+        navigate("/login");
+      })
+      .catch((error) => {
+        console.error("Error : ", error);
+      });
   };
 
   return (
@@ -224,9 +259,9 @@ export default function JoinPage() {
                   label="Type"
                   onChange={handleCmpTypeChange}
                 >
-                  <MenuItem value={10}>레저</MenuItem>
-                  <MenuItem value={20}>산악등반</MenuItem>
-                  <MenuItem value={30}>수영</MenuItem>
+                  <MenuItem value="레저">레저</MenuItem>
+                  <MenuItem value="산악등반">산악등반</MenuItem>
+                  <MenuItem value="수명">수영</MenuItem>
                 </Select>
               </FormControl>
               <div className={"typeFont"}>
@@ -263,7 +298,7 @@ export default function JoinPage() {
       </div>
 
       <StyledButton>
-        <button onClick={signUpBtn}>회원가입</button>
+        <button onClick={join}>회원가입</button>
       </StyledButton>
     </StyledJoin>
   );
