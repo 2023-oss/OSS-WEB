@@ -106,14 +106,6 @@ const StyledPadding = styled.div`
   padding: 24px;
 `;
 
-interface ExtendedDraggableChildrenFn extends DraggableChildrenFn {
-  snapshot: DraggableStateSnapshot;
-}
-
-interface ExtendedDraggableProps extends DraggableProps {
-  children: ExtendedDraggableChildrenFn;
-}
-
 interface TabPanelProps {
   value: number;
   index: number;
@@ -143,7 +135,14 @@ export default function DragDrop({
   // 선택된 블록들을 저장할 상태 배열
   const [selectedBlocks, setSelectedBlocks] = useState<Block[]>([]);
   const [tabValue, setTabValue] = useState(0);
-  const [formDataSet, setFormDataSet] = useState({
+  const [formDataSet, setFormDataSet] = useState<{
+    defaultBlock: string[];
+    personalinfoBlock: string[];
+    safetyBlock: string[];
+    responsibilityBlock: string[];
+    paymentBlock: string[];
+    etcBlock: string[];
+  }>({
     defaultBlock: [],
     personalinfoBlock: [],
     safetyBlock: [],
@@ -151,6 +150,19 @@ export default function DragDrop({
     paymentBlock: [],
     etcBlock: [],
   });
+
+  const handleRegisterTemplate = () => {
+    if (formDataSet !== null) {
+      registerTemplate(formDataSet)
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.error("Error:", err.response.data.message);
+        });
+    }
+  };
+
   const resetBlocks = () => {
     const updatedBeforeBlocks = blocks["before"].map((item) => ({
       ...item,
@@ -259,23 +271,6 @@ export default function DragDrop({
 
   if (!enabled) {
     return null;
-  }
-
-  function getCardClassName(
-    snapshot: DraggableStateSnapshot,
-    category: string
-  ) {
-    const baseClassName =
-      "rounded-lg bg-white p-4 transition-shadow dark:bg-[#121212]";
-    return baseClassName;
-
-    // if (category === "personal-info") {
-    //   return `${baseClassName} shadow bg-blue-200`;
-    // } else if (category === "safety") {
-    //   return `${baseClassName} shadow bg-green-300`;
-    // } else {
-    //   return `${baseClassName} shadow`;
-    // }
   }
 
   const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -443,7 +438,7 @@ export default function DragDrop({
                   </div>
                 ))}
               </div>
-              <button>Submit Template</button>
+              <button onClick={handleRegisterTemplate}>Submit Template</button>
             </Typography>
           </Box>
         </Modal>
