@@ -91,6 +91,7 @@ export default function LoginPage() {
       username: username,
       password: password,
     };
+
     login(loginUser)
       .then((res) => {
         console.log(res.data);

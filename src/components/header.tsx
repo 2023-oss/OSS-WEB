@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Wrapper from "./Wrapper";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../lib/api";
 
 const StyledHeader = styled.header<{ active: number }>`
   a {
@@ -60,6 +61,28 @@ type HeaderProps = {
   active: number;
 };
 export default function Header(props: HeaderProps) {
+  const navigate = useNavigate();
+  const getCookie = (): string => {
+    const cookies = document.cookie.split(";");
+    console.log(cookies);
+    for (let cookie of cookies) {
+      let trimmedCookie = cookie.trim();
+      if (trimmedCookie.startsWith("access_token=")) {
+        let accessToken = trimmedCookie.substring("access_token=".length);
+
+        console.log("accessToken: " + accessToken);
+        return accessToken;
+      }
+    }
+    return "";
+  };
+
+  const handleLogout = () => {
+    logout().then((res) => {
+      console.log(res.data);
+      navigate("/login");
+    });
+  };
   return (
     <Wrapper>
       <StyledHeader active={props.active}>
@@ -76,14 +99,23 @@ export default function Header(props: HeaderProps) {
             동의서 제작
           </Link>
         </div>
-        <div className="account">
-          <Link to="/login">
-            <span>로그인</span>
-          </Link>
-          <Link to="/join">
-            <span>회원가입</span>
-          </Link>
-        </div>
+
+        {getCookie() === "" ? (
+          <div className="account">
+            <Link to="/login">
+              <span>로그인</span>
+            </Link>
+            <Link to="/join">
+              <span>회원가입</span>
+            </Link>
+          </div>
+        ) : (
+          <div className="account">
+            <a href="#" onClick={handleLogout}>
+              <span>로그아웃</span>
+            </a>
+          </div>
+        )}
       </StyledHeader>
     </Wrapper>
   );

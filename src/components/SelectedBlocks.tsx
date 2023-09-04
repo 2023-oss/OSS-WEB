@@ -38,24 +38,34 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
     props.setFormDataSet({
       ...props.formDataSet,
       safetyBlock: safetyBlock,
-    });
-    props.setFormDataSet({
-      ...props.formDataSet,
       personalinfoBlock: personalInfoBlock,
-    });
-    props.setFormDataSet({
-      ...props.formDataSet,
       responsibilityBlock: responsibilityBlock,
-    });
-    props.setFormDataSet({
-      ...props.formDataSet,
       paymentBlock: paymentBlock,
-    });
-    props.setFormDataSet({
-      ...props.formDataSet,
       defaultBlock: defaultBlock,
+      etcBlock: etcBlock,
     });
-    props.setFormDataSet({ ...props.formDataSet, etcBlock: etcBlock });
+    console.log("props.formDataset", props.formDataSet);
+    // props.setFormDataSet({
+    //   ...props.formDataSet,
+    //   safetyBlock: safetyBlock,
+    // });
+    // props.setFormDataSet({
+    //   ...props.formDataSet,
+    //   personalinfoBlock: personalInfoBlock,
+    // });
+    // props.setFormDataSet({
+    //   ...props.formDataSet,
+    //   responsibilityBlock: responsibilityBlock,
+    // });
+    // props.setFormDataSet({
+    //   ...props.formDataSet,
+    //   paymentBlock: paymentBlock,
+    // });
+    // props.setFormDataSet({
+    //   ...props.formDataSet,
+    //   defaultBlock: defaultBlock,
+    // });
+    // props.setFormDataSet({ ...props.formDataSet, etcBlock: etcBlock });
   }, [props.selectedBlocks]);
 
   for (let i = 0; i < props.selectedBlocks.length; i++) {
