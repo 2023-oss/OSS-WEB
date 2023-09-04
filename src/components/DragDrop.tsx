@@ -105,7 +105,6 @@ const StyledDroppableContainer = styled.div`
 const StyledPadding = styled.div`
   padding: 24px;
 `;
-
 interface TabPanelProps {
   value: number;
   index: number;
@@ -150,6 +149,8 @@ export default function DragDrop({
     paymentBlock: [],
     etcBlock: [],
   });
+
+  console.log(formDataSet);
 
   const handleRegisterTemplate = () => {
     console.log("formDataSet:", formDataSet);
@@ -291,7 +292,7 @@ export default function DragDrop({
     setBlocks({ ...blocks, after: newBlocks });
     //setSelectedBlocks(newBlocks);
   };
-
+  console.log(formDataSet.defaultBlock);
   return (
     <div className="p-4">
       {/* <div className="mb-2">
@@ -427,17 +428,30 @@ export default function DragDrop({
             >
               작성된 동의서
             </Typography>
+
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div>
-                {selectedBlocks.map((block: any) => (
-                  <div key={block.id}>
-                    <h3>{block.category}</h3>
-                    <p>{block.content}</p>
-                    <p>예시: {block.ex}</p>
+                <form>
+                  <div className={""}>
+                    <tr>
+                      <td>안녕</td>
+                      <td>안녕</td>
+
+                      <td>안녕</td>
+                    </tr>
                   </div>
-                ))}
+                </form>
               </div>
-              <button onClick={handleRegisterTemplate}>Submit Template</button>
+              <button
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "24px",
+                }}
+                onClick={handleRegisterTemplate}
+              >
+                Submit Template
+              </button>
             </Typography>
           </Box>
         </Modal>
