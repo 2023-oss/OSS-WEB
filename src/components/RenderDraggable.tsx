@@ -64,7 +64,7 @@ interface RenderDraggableProps extends React.ComponentPropsWithRef<"div"> {
 export function RenderDraggable(props: RenderDraggableProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newContent = e.target.value;
-    props.handleContentChange(newContent, props.index);
+    props.handleContentChange(newContent, props.item.index);
   };
 
   return (

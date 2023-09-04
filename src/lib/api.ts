@@ -16,7 +16,6 @@ export const login = ({
     password: password,
   });
 
-
 export const signUp = (formData: FormData) =>
   api.post("/user/join", formData, {
     headers: {

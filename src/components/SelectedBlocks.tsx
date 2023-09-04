@@ -6,14 +6,23 @@ import { useEffect } from "react";
 interface SelectedBlockProps extends React.ComponentPropsWithRef<"div"> {
   selectedBlocks: Block[];
   formDataSet: {
-    defaultBlock: any[];
-    personalinfoBlock: any[];
-    safetyBlock: any[];
-    responsibilityBlock: any[];
-    paymentBlock: any[];
-    etcBlock: any[];
+    defaultBlock: string[];
+    personalinfoBlock: string[];
+    safetyBlock: string[];
+    responsibilityBlock: string[];
+    paymentBlock: string[];
+    etcBlock: string[];
   };
-  setFormDataSet: Function;
+  setFormDataSet: React.Dispatch<
+    React.SetStateAction<{
+      defaultBlock: string[];
+      personalinfoBlock: string[];
+      safetyBlock: string[];
+      responsibilityBlock: string[];
+      paymentBlock: string[];
+      etcBlock: string[];
+    }>
+  >;
 }
 
 export default function SelectedBlockList(props: SelectedBlockProps) {
@@ -24,51 +33,47 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
   let defaultBlock: any = [];
   let etcBlock: any = [];
 
-  const [formDataSet, setFormDataSet] = useState({
-    defaultBlock: [],
-    personalinfoBlock: [],
-    safetyBlock: [],
-    responsibilityBlock: [],
-    paymentBlock: [],
-    etcBlock: [],
-  });
   useEffect(() => {
-    const newFormDataSet = {
-      defaultBlock: [],
-      personalinfoBlock: [],
-      safetyBlock: [],
-      responsibilityBlock: [],
-      paymentBlock: [],
-      etcBlock: [],
-    };
-
-    setFormDataSet(newFormDataSet);
+    console.log("props.select=>", props.selectedBlocks);
+    props.setFormDataSet({
+      ...props.formDataSet,
+      safetyBlock: safetyBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      personalinfoBlock: personalInfoBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      responsibilityBlock: responsibilityBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      paymentBlock: paymentBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      defaultBlock: defaultBlock,
+    });
+    props.setFormDataSet({ ...props.formDataSet, etcBlock: etcBlock });
   }, [props.selectedBlocks]);
 
   for (let i = 0; i < props.selectedBlocks.length; i++) {
     if (props.selectedBlocks[i].category === "safety") {
       safetyBlock.push(props.selectedBlocks[i].content);
-      setFormDataSet({ ...formDataSet, safetyBlock: safetyBlock });
     } else if (props.selectedBlocks[i].category === "personal-info") {
       personalInfoBlock.push(props.selectedBlocks[i].content);
-      setFormDataSet({ ...formDataSet, personalinfoBlock: personalInfoBlock });
     } else if (props.selectedBlocks[i].category === "responsibility") {
       responsibilityBlock.push(props.selectedBlocks[i].content);
-      setFormDataSet({
-        ...formDataSet,
-        responsibilityBlock: responsibilityBlock,
-      });
     } else if (props.selectedBlocks[i].category === "payment") {
       paymentBlock.push(props.selectedBlocks[i].content);
-      setFormDataSet({ ...formDataSet, paymentBlock: paymentBlock });
     } else if (props.selectedBlocks[i].category === "default") {
       defaultBlock.push(props.selectedBlocks[i].question);
-      setFormDataSet({ ...formDataSet, defaultBlock: defaultBlock });
     } else {
       etcBlock.push(props.selectedBlocks[i].content);
-      setFormDataSet({ ...formDataSet, etcBlock: etcBlock });
     }
   }
+
   safetyBlock = safetyBlock.join("<br/>");
   personalInfoBlock = personalInfoBlock.join("<br/>");
   responsibilityBlock = responsibilityBlock.join("<br/>");
@@ -76,27 +81,7 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
   defaultBlock = defaultBlock.join("<br/>");
   etcBlock = etcBlock.join("<br/>");
 
-  setFormDataSet({
-    ...formDataSet,
-    defaultBlock: defaultBlock,
-    personalinfoBlock: personalInfoBlock,
-    safetyBlock: safetyBlock,
-    responsibilityBlock: responsibilityBlock,
-    paymentBlock: paymentBlock,
-    etcBlock: etcBlock,
-  });
-
-  const handleRegisterTemplate = () => {
-    if (formDataSet !== null) {
-      registerTemplate(formDataSet)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.error("Error:", err.response.data.message);
-        });
-    }
-  };
+  console.log("defaultBlock=>", defaultBlock);
 
   return (
     <div>
