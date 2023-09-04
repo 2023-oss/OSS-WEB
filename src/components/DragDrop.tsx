@@ -152,15 +152,14 @@ export default function DragDrop({
   });
 
   const handleRegisterTemplate = () => {
-    if (formDataSet !== null) {
-      registerTemplate(formDataSet)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.error("Error:", err.response.data.message);
-        });
-    }
+    console.log("formDataSet:", formDataSet);
+    registerTemplate(formDataSet)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error("Error:", err.response.data.message);
+      });
   };
 
   const resetBlocks = () => {
