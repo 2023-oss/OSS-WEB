@@ -33,59 +33,44 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
   let defaultBlock: any = [];
   let etcBlock: any = [];
 
-  // const [formDataSet, setFormDataSet] = useState({
-  //   defaultBlock: [],
-  //   personalinfoBlock: [],
-  //   safetyBlock: [],
-  //   responsibilityBlock: [],
-  //   paymentBlock: [],
-  //   etcBlock: [],
-  // });
-
-  // useEffect(() => {
-  //   const newFormDataSet = {
-  //     defaultBlock: [],
-  //     personalinfoBlock: [],
-  //     safetyBlock: [],
-  //     responsibilityBlock: [],
-  //     paymentBlock: [],
-  //     etcBlock: [],
-  //   };
-
-  //   setFormDataSet(newFormDataSet);
-  // }, [props.selectedBlocks]);
+  useEffect(() => {
+    console.log("props.select=>", props.selectedBlocks);
+    props.setFormDataSet({
+      ...props.formDataSet,
+      safetyBlock: safetyBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      personalinfoBlock: personalInfoBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      responsibilityBlock: responsibilityBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      paymentBlock: paymentBlock,
+    });
+    props.setFormDataSet({
+      ...props.formDataSet,
+      defaultBlock: defaultBlock,
+    });
+    props.setFormDataSet({ ...props.formDataSet, etcBlock: etcBlock });
+  }, [props.selectedBlocks]);
 
   for (let i = 0; i < props.selectedBlocks.length; i++) {
     if (props.selectedBlocks[i].category === "safety") {
       safetyBlock.push(props.selectedBlocks[i].content);
-      props.setFormDataSet({ ...props.formDataSet, safetyBlock: safetyBlock });
     } else if (props.selectedBlocks[i].category === "personal-info") {
       personalInfoBlock.push(props.selectedBlocks[i].content);
-      props.setFormDataSet({
-        ...props.formDataSet,
-        personalinfoBlock: personalInfoBlock,
-      });
     } else if (props.selectedBlocks[i].category === "responsibility") {
       responsibilityBlock.push(props.selectedBlocks[i].content);
-      props.setFormDataSet({
-        ...props.formDataSet,
-        responsibilityBlock: responsibilityBlock,
-      });
     } else if (props.selectedBlocks[i].category === "payment") {
       paymentBlock.push(props.selectedBlocks[i].content);
-      props.setFormDataSet({
-        ...props.formDataSet,
-        paymentBlock: paymentBlock,
-      });
     } else if (props.selectedBlocks[i].category === "default") {
       defaultBlock.push(props.selectedBlocks[i].question);
-      props.setFormDataSet({
-        ...props.formDataSet,
-        defaultBlock: defaultBlock,
-      });
     } else {
       etcBlock.push(props.selectedBlocks[i].content);
-      props.setFormDataSet({ ...props.formDataSet, etcBlock: etcBlock });
     }
   }
 
@@ -96,27 +81,7 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
   defaultBlock = defaultBlock.join("<br/>");
   etcBlock = etcBlock.join("<br/>");
 
-  // props.setFormDataSet({
-  //   ...props.formDataSet,
-  //   defaultBlock: defaultBlock,
-  //   personalinfoBlock: personalInfoBlock,
-  //   safetyBlock: safetyBlock,
-  //   responsibilityBlock: responsibilityBlock,
-  //   paymentBlock: paymentBlock,
-  //   etcBlock: etcBlock,
-  // });
-
-  const handleRegisterTemplate = () => {
-    if (props.formDataSet !== null) {
-      registerTemplate(props.formDataSet)
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.error("Error:", err.response.data.message);
-        });
-    }
-  };
+  console.log("defaultBlock=>", defaultBlock);
 
   return (
     <div>

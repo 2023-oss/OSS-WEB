@@ -252,7 +252,7 @@ export default function DragDrop({
       }
 
       setBlocks(newBlocks);
-      setSelectedBlocks(newBlocks["after"]);
+      //setSelectedBlocks(newBlocks["after"]);
     }
   };
 
@@ -290,7 +290,7 @@ export default function DragDrop({
   const handleDeleteBlock = (index: number) => {
     const newBlocks = blocks.after.filter((block) => block.index !== index);
     setBlocks({ ...blocks, after: newBlocks });
-    setSelectedBlocks(newBlocks);
+    //setSelectedBlocks(newBlocks);
   };
 
   return (
