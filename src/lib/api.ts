@@ -1,14 +1,14 @@
 import axios from "axios";
 import { Block } from "../components/CustomBlocks";
 
-const api = axios.create({
-  baseURL: "http://localhost:8000",
-  withCredentials: true,
-});
 // const api = axios.create({
-//   baseURL: "http://15.164.213.210:8000",
+//   baseURL: "http://localhost:8000",
 //   withCredentials: true,
 // });
+const api = axios.create({
+  baseURL: "http://15.164.213.210:8000",
+  withCredentials: true,
+});
 
 export const login = ({
   username,

@@ -54,6 +54,19 @@ export default function DocumentList({ forms }: { forms: Form[] }) {
     }
     console.log(clickCnt);
   };
+
+  const getDate = (date: string): string => {
+    const dateObject = new Date(date);
+
+    const year = dateObject.getFullYear();
+    const month = String(dateObject.getMonth() + 1).padStart(2, "0"); // 월은 0부터 시작하므로 +1을 해줍니다.
+    const day = String(dateObject.getDate()).padStart(2, "0");
+    const hours = String(dateObject.getHours()).padStart(2, "0");
+    const minutes = String(dateObject.getMinutes()).padStart(2, "0");
+
+    const formattedTimeString = `${year}-${month}-${day} ${hours}:${minutes}`;
+    return formattedTimeString;
+  };
   return (
     <Wrapper>
       <StyledDocumentList>
@@ -68,16 +81,14 @@ export default function DocumentList({ forms }: { forms: Form[] }) {
           <tr>
             <th>번호</th>
             <th>작성날짜</th>
-            <th>이름</th>
-            <th>연락처</th>
+            <th>회원ID</th>
             <th>동의서</th>
           </tr>
           {forms.map((form: Form) => (
             <tr>
               <td>{form.id}</td>
-              <td>{form.date}</td>
-              <td>{form.name}</td>
-              <td>{form.phone}</td>
+              <td>{getDate(form.createdDate)}</td>
+              <td>{form.vpId}</td>
               <td>
                 <img src={"/icon/file.svg"} alt={"file"} />
               </td>

@@ -7,9 +7,9 @@ import Pagination from "../components/Pagination";
 
 export type Form = {
   id: number;
-  name: string;
-  phone: string;
-  date: string;
+  vpId: string;
+  form: string;
+  createdDate: string;
 };
 export type Page = {
   forms: Form[];
