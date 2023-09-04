@@ -1,8 +1,14 @@
 import axios from "axios";
 import { Block } from "../components/CustomBlocks";
 
-// const api = axios.create({ baseURL: "http://localhost:8000" });
-const api = axios.create({ baseURL: "http://15.164.213.210:8000" });
+const api = axios.create({
+  baseURL: "http://localhost:8000",
+  withCredentials: true,
+});
+// const api = axios.create({
+//   baseURL: "http://15.164.213.210:8000",
+//   withCredentials: true,
+// });
 
 export const login = ({
   username,
@@ -15,6 +21,8 @@ export const login = ({
     username: username,
     password: password,
   });
+
+export const logout = () => api.post("/auth/logout");
 
 export const signUp = (formData: FormData) =>
   api.post("/user/join", formData, {
