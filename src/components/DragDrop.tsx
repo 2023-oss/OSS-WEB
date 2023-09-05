@@ -16,6 +16,7 @@ import tabs from "../data/tabs";
 import { RenderDraggable } from "./RenderDraggable";
 import { registerTemplate } from "../lib/api";
 import Modal from "@mui/material/Modal";
+<<<<<<< HEAD
 import SelectedBlockList from "./SelectedBlocks";
 import { styled } from "styled-components";
 import Button from "@mui/material";
@@ -164,6 +165,16 @@ const StyledmodalBar = styled.div`
     height: 200px;
   }
 `;
+=======
+import Button from "@mui/material/Button";
+import SelectedBlockList from "./SelectedBlocks";
+import { styled } from "styled-components";
+
+export const $ = (...classnames: any[]) => {
+  return classnames.filter((v) => !!v).join(" ");
+};
+
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
 const style = {
   position: "absolute",
   top: "50%",
@@ -190,11 +201,15 @@ const StyledButton = styled.div`
   box-shadow: 6px 6px 4px rgb(0, 0, 0, 0.25);
   &:hover {
     background-color: #489db5;
+<<<<<<< HEAD
     transition: all 0.3s;
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 
   &:active {
     background-color: #357a92;
+<<<<<<< HEAD
     transition: all 0.3s;
   }
 `;
@@ -208,6 +223,19 @@ const StyledResetButton = styled.div`
   width: 100px;
   height: 30px;
 
+=======
+  }
+`;
+const StyledResetButton = styled.div`
+  position: absolute;
+  bottom: 0px;
+  left: 45%;
+  transform: translateX(-50%); // button을 중앙 정렬
+  background-color: #5fc1df;
+  width: 100px;
+  height: 30px;
+  margin: 30px;
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   color: white;
   text-align: center;
   font-size: 15px;
@@ -216,12 +244,18 @@ const StyledResetButton = styled.div`
   border-radius: 5px;
   &:hover {
     background-color: #489db5;
+<<<<<<< HEAD
     transition: all 0.3s;
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 
   &:active {
     background-color: #357a92;
+<<<<<<< HEAD
     transition: all 0.3s;
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 `;
 const StyledGridContainer = styled.div`
@@ -250,7 +284,10 @@ const StyledDroppableContainer = styled.div`
 const StyledPadding = styled.div`
   padding: 24px;
 `;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
 interface TabPanelProps {
   value: number;
   index: number;
@@ -296,6 +333,22 @@ export default function DragDrop({
     etcBlock: [],
   });
 
+<<<<<<< HEAD
+=======
+  console.log(formDataSet);
+
+  const handleRegisterTemplate = () => {
+    console.log("formDataSet:", formDataSet);
+    registerTemplate(formDataSet)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.error("Error:", err.response.data.message);
+      });
+  };
+
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   const resetBlocks = () => {
     const updatedBeforeBlocks = blocks["before"].map((item) => ({
       ...item,
@@ -315,7 +368,11 @@ export default function DragDrop({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+<<<<<<< HEAD
   console.log(formDataSet);
+=======
+  console.log(selectedBlocks);
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   const toggleSelect = (clickedBlock: Block) => {
     // 무조건 before 상태일 때만 선택 가능
     // after 상태일 때 선택 불가(버튼으로 삭제 가능하게)
@@ -392,7 +449,11 @@ export default function DragDrop({
   useEffect(() => {
     setSelectedBlocks(blocks["after"]);
   }, [blocks]);
+<<<<<<< HEAD
   console.log(selectedBlocks + "유후");
+=======
+
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
@@ -425,7 +486,11 @@ export default function DragDrop({
     setBlocks({ ...blocks, after: newBlocks });
     //setSelectedBlocks(newBlocks);
   };
+<<<<<<< HEAD
 
+=======
+  console.log(formDataSet.defaultBlock);
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   return (
     <div className="p-4">
       {/* <div className="mb-2">
@@ -556,14 +621,22 @@ export default function DragDrop({
                 display: "flex",
                 justifyContent: "center",
                 fontWeight: "bold",
+<<<<<<< HEAD
                 fontSize: "28px",
               }}
             >
               개인정보 제공 및 활용 동의서
+=======
+                fontSize: "25px",
+              }}
+            >
+              작성된 동의서
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
             </Typography>
 
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div>
+<<<<<<< HEAD
                 <StyledmodalBar>
                   <CustomSign
                     selectedBlocks={selectedBlocks}
@@ -572,6 +645,29 @@ export default function DragDrop({
                   />
                 </StyledmodalBar>
               </div>
+=======
+                <form>
+                  <div className={""}>
+                    <tr>
+                      <td>안녕</td>
+                      <td>안녕</td>
+
+                      <td>안녕</td>
+                    </tr>
+                  </div>
+                </form>
+              </div>
+              <button
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  fontSize: "24px",
+                }}
+                onClick={handleRegisterTemplate}
+              >
+                Submit Template
+              </button>
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
             </Typography>
           </Box>
         </Modal>
