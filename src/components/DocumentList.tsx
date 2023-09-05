@@ -1,20 +1,10 @@
 import styled from "styled-components";
 import Wrapper from "./Wrapper";
-import { User, data } from "../data/userList";
-import MyCalendar from "./MyCalendar";
 import { useState } from "react";
-import dayjs from "dayjs";
+
 import { Form } from "../pages/edit_document_page";
+
 const StyledDocumentList = styled.div`
-  .date-box {
-    font-size: 2rem;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    img {
-      margin-left: 1rem;
-    }
-  }
   th {
     border-bottom: 2px solid black;
     padding-bottom: 15px;
@@ -37,24 +27,6 @@ const StyledDocumentList = styled.div`
 `;
 
 export default function DocumentList({ forms }: { forms: Form[] }) {
-  console.log("forms", forms);
-  let now = dayjs();
-  now.format();
-  const documents = [{}];
-  const [calbtn, isCalbtn] = useState(false);
-  const [clickCnt, setclickCnt] = useState(0);
-
-  const openCal = () => {
-    setclickCnt((prevCnt) => prevCnt + 1);
-
-    if (clickCnt % 2 === 0) {
-      isCalbtn(false);
-    } else {
-      isCalbtn(true);
-    }
-    console.log(clickCnt);
-  };
-
   const getDate = (date: string): string => {
     const dateObject = new Date(date);
 
@@ -67,16 +39,10 @@ export default function DocumentList({ forms }: { forms: Form[] }) {
     const formattedTimeString = `${year}-${month}-${day} ${hours}:${minutes}`;
     return formattedTimeString;
   };
+
   return (
     <Wrapper>
       <StyledDocumentList>
-        <div className={"date-box"}>
-          <span></span>
-          <button onClick={openCal}>
-            {calbtn && <MyCalendar></MyCalendar>}
-            <img src={"/icon/calender.svg"} alt={"calender"} />
-          </button>
-        </div>
         <table>
           <tr>
             <th>번호</th>
