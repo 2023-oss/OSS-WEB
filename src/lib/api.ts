@@ -57,11 +57,7 @@ export const identify = async ({
     return response.data;
   } catch (error) {
     console.error("Error in identify:", error);
-<<<<<<< HEAD
     // throw error; // 호출자에게 예외 다시 던지기
-=======
-    throw error; // 호출자에게 예외 다시 던지기
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 };
 
@@ -112,9 +108,6 @@ export const registerForm = (data: FormData, templateId: number) =>
 
 export const viewForms = (templateId: number, page: number) =>
   api.get(`/form/viewAll/${templateId}?page=${page}`);
-<<<<<<< HEAD
-=======
 
 export const searchForms = (templateId: number, page: number, vpId: string) =>
   api.get(`/form/viewAll/${templateId}?page=${page}&search=${vpId}`);
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe

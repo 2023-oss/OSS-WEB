@@ -125,21 +125,13 @@ export const initialData: Block[] = [
     question: "이름",
     index: 12,
   },
-<<<<<<< HEAD
-
-=======
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   {
     id: "block-14",
     status: "before",
     isClicked: false,
     category: "default",
     content: "",
-<<<<<<< HEAD
     question: "전화번호",
-=======
-    question: "성별",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     index: 13,
   },
   {
@@ -148,11 +140,7 @@ export const initialData: Block[] = [
     isClicked: false,
     category: "default",
     content: "",
-<<<<<<< HEAD
     question: "",
-=======
-    question: "전화번호",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     index: 14,
   },
   {
@@ -161,25 +149,16 @@ export const initialData: Block[] = [
     isClicked: false,
     category: "default",
     content: "",
-<<<<<<< HEAD
     question: "모두 동의합니다",
-=======
-    question: "주소",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     index: 15,
   },
   {
     id: "block-17",
     status: "before",
     isClicked: false,
-<<<<<<< HEAD
     category: "responsibility",
     content:
       "해당 시설을 이용함에 있어 고객 부주의로 발생하는 사고, 부상, 재물 등의 손해에 관하여 시설에 책임이 없으며 발생하는 손해에 관하여 시설에 청구하지 않음을 동의합니다.",
-=======
-    category: "default",
-    content: "",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     question: "",
     index: 16,
   },
@@ -189,11 +168,7 @@ export const initialData: Block[] = [
     isClicked: false,
     category: "responsibility",
     content:
-<<<<<<< HEAD
       "물품 분실 및 도난 사건 관련하여 업장에서는 일절 책임지지 않습니다.",
-=======
-      "해당 시설을 이용함에 있어 고객 부주의로 발생하는 사고, 부상, 재물 등의 손해에 관하여 시설에 책임이 없으며 발생하는 손해에 관하여 시설에 청구하지 않음을 동의합니다.",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     question: "",
     index: 17,
   },
@@ -203,11 +178,7 @@ export const initialData: Block[] = [
     isClicked: false,
     category: "responsibility",
     content:
-<<<<<<< HEAD
       "본인은 활동에 사용되는 교육장비에 대하여, 파손 및 문실 등에 대한 책임을 지며, 현 시가의 __% 해당하는 금액을 해당 관계자에게 배상할 것을 서약합니다.",
-=======
-      "물품 분실 및 도난 사건 관련하여 업장에서는 일절 책임지지 않습니다.",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     question: "",
     index: 18,
   },
@@ -217,11 +188,7 @@ export const initialData: Block[] = [
     isClicked: false,
     category: "responsibility",
     content:
-<<<<<<< HEAD
       "본인의 부모 및 법정대리인도  활동 중에 본인의 부주의로 인해 발생할 수 있 는 사고, 즉 개인적인 부상, 재산상의 피해, 의학적인 사고 등 어떠한 상황이 발생 하더라도 강사 와 교육을 주관하는 관계자 및 관계기관에 대해 면책은 물론, 책임전가를 하지 않은 것을 서약합니다.",
-=======
-      "본인은 활동에 사용되는 교육장비에 대하여, 파손 및 문실 등에 대한 책임을 지며, 현 시가의 __% 해당하는 금액을 해당 관계자에게 배상할 것을 서약합니다.",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     question: "",
     index: 19,
   },
@@ -230,12 +197,7 @@ export const initialData: Block[] = [
     status: "before",
     isClicked: false,
     category: "responsibility",
-<<<<<<< HEAD
     content: "당일 예약시 환불이 불가합니다.",
-=======
-    content:
-      "본인의 부모 및 법정대리인도  활동 중에 본인의 부주의로 인해 발생할 수 있 는 사고, 즉 개인적인 부상, 재산상의 피해, 의학적인 사고 등 어떠한 상황이 발생 하더라도 강사 와 교육을 주관하는 관계자 및 관계기관에 대해 면책은 물론, 책임전가를 하지 않은 것을 서약합니다.",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     question: "",
     index: 20,
   },
@@ -244,11 +206,7 @@ export const initialData: Block[] = [
     status: "before",
     isClicked: false,
     category: "responsibility",
-<<<<<<< HEAD
     content: "",
-=======
-    content: "당일 예약시 환불이 불가합니다.",
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
     question: "",
     index: 21,
   },
@@ -307,16 +265,4 @@ export const initialData: Block[] = [
     question: "",
     index: 27,
   },
-<<<<<<< HEAD
-=======
-  {
-    id: "block-29",
-    status: "before",
-    isClicked: false,
-    category: "responsibility",
-    content: "",
-    question: "",
-    index: 28,
-  },
->>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
 ];
