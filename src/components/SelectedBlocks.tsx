@@ -45,6 +45,8 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
       etcBlock: etcBlock,
     });
     console.log("props.formDataset", props.formDataSet);
+<<<<<<< HEAD
+=======
     // props.setFormDataSet({
     //   ...props.formDataSet,
     //   safetyBlock: safetyBlock,
@@ -66,6 +68,7 @@ export default function SelectedBlockList(props: SelectedBlockProps) {
     //   defaultBlock: defaultBlock,
     // });
     // props.setFormDataSet({ ...props.formDataSet, etcBlock: etcBlock });
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }, [props.selectedBlocks]);
 
   for (let i = 0; i < props.selectedBlocks.length; i++) {

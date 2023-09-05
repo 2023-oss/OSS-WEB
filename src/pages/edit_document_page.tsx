@@ -1,5 +1,11 @@
 import Header from "../components/header";
 import DocumentList from "../components/DocumentList";
+<<<<<<< HEAD
+import { viewForms } from "../lib/api";
+import { useEffect, useState } from "react";
+import { Form } from "react-router-dom";
+import Pagination from "../components/Pagination";
+=======
 import { searchForms, viewForms } from "../lib/api";
 import { useEffect, useState } from "react";
 import { Form } from "react-router-dom";
@@ -40,6 +46,7 @@ const StyledWrapper = styled.div`
     display: flex;
   }
 `;
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
 
 export type Form = {
   id: number;
@@ -66,17 +73,34 @@ export default function EditDocumentPage() {
     totalPages: 0,
     last: false,
   });
+<<<<<<< HEAD
+  const getDocumentList = async (pageNumber: number) => {
+    viewForms(4, pageNumber).then((res) => {
+=======
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // 동의서 목록
   const getDocumentList = async (pageNumber: number, searchQuery: string) => {
     searchForms(6, pageNumber, searchQuery).then((res) => {
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
       setPage(res.data);
       setForms(res.data.forms);
       console.log("res : ", res.data);
     });
   };
   useEffect(() => {
+<<<<<<< HEAD
+    getDocumentList(1);
+  }, []); // deps가 빈 배열이므로 마운트될 때만 실행됨.!
+
+  const handlePageChange = (pageNumber: number) => {
+    getDocumentList(pageNumber);
+  };
+
+  return (
+    <>
+      <Header active={1}></Header>
+=======
     getDocumentList(1, searchQuery);
   }, []); // deps가 빈 배열이므로 마운트될 때만 실행됨.!
 
@@ -134,6 +158,7 @@ export default function EditDocumentPage() {
         </div>
       </StyledWrapper>
 
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
       <DocumentList forms={forms} />
       <Pagination page={page} onPageChange={handlePageChange} />
     </>

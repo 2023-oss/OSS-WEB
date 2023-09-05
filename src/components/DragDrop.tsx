@@ -16,6 +16,156 @@ import tabs from "../data/tabs";
 import { RenderDraggable } from "./RenderDraggable";
 import { registerTemplate } from "../lib/api";
 import Modal from "@mui/material/Modal";
+<<<<<<< HEAD
+import SelectedBlockList from "./SelectedBlocks";
+import { styled } from "styled-components";
+import Button from "@mui/material";
+import CustomSign from "./CustomSign";
+export const $ = (...classnames: any[]) => {
+  return classnames.filter((v) => !!v).join(" ");
+};
+const StyledmodalBar = styled.div`
+  width: 700px;
+  margin: 0 auto;
+  overflow-y: auto; /* 수직 스크롤을 추가 */
+  max-height: 80vh; /* 스크롤 최대 높이 설정 */
+  .writeDate {
+    display: flex;
+    justify-content: center;
+  }
+  button {
+    display: flex;
+    justify-content: center;
+  }
+  .ModalBar {
+    display: flex;
+    justify-content: center;
+  }
+  .ModalWrap {
+    background-color: lightgray;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #000;
+  }
+  .ModalContent {
+    background-color: lightgray;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #000;
+  }
+  .paymentRender {
+    display: flex;
+    justify-content: center;
+  }
+  .paymentWrap {
+    background-color: white;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #000;
+    font-weight: bold;
+  }
+  .paymentContent {
+    background-color: white;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #000;
+  }
+
+  .defaultRender {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .defaultContent {
+    background-color: white;
+    padding: 5px;
+  }
+  .personalinfoRender {
+    display: flex;
+    justify-content: center;
+  }
+  .personalinfoWrap {
+    background-color: white;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #000;
+    font-weight: bold;
+  }
+  .personalinfoContent {
+    background-color: white;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #000;
+  }
+  .safetyRender {
+    display: flex;
+    justify-content: center;
+  }
+  .safetyWrap {
+    background-color: white;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #000;
+    font-weight: bold;
+  }
+  .safetyContent {
+    background-color: white;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #000;
+  }
+  .responsibilityRender {
+    display: flex;
+    justify-content: center;
+  }
+  .responsibilityWrap {
+    background-color: white;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #000;
+    font-weight: bold;
+  }
+  .responsibilityContent {
+    background-color: white;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #000;
+  }
+  .etcRender {
+    display: flex;
+    justify-content: center;
+  }
+  .etcWrap {
+    background-color: white;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #000;
+    font-weight: bold;
+  }
+  .etcContent {
+    background-color: white;
+    padding: 5px;
+    width: 500px;
+    border: 1px solid #000;
+  }
+  .SignTab {
+    display: flex;
+    flex-direction: column;
+  }
+  .SignTab h1 {
+    display: flex;
+    font-size: 30px;
+    font-weight: bold;
+    justify-content: center;
+  }
+  .SignTab .Tab {
+    box-shadow: 2px;
+    border: 1px solid #000;
+    height: 200px;
+  }
+`;
+=======
 import Button from "@mui/material/Button";
 import SelectedBlockList from "./SelectedBlocks";
 import { styled } from "styled-components";
@@ -24,6 +174,7 @@ export const $ = (...classnames: any[]) => {
   return classnames.filter((v) => !!v).join(" ");
 };
 
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
 const style = {
   position: "absolute",
   top: "50%",
@@ -50,10 +201,29 @@ const StyledButton = styled.div`
   box-shadow: 6px 6px 4px rgb(0, 0, 0, 0.25);
   &:hover {
     background-color: #489db5;
+<<<<<<< HEAD
+    transition: all 0.3s;
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 
   &:active {
     background-color: #357a92;
+<<<<<<< HEAD
+    transition: all 0.3s;
+  }
+`;
+
+const StyledResetButton = styled.div`
+  justify-content: center;
+  bottom: 0px;
+  left: 45%;
+  /* transform: translateX(5%); // button을 중앙 정렬 */
+  background-color: #5fc1df;
+  width: 100px;
+  height: 30px;
+
+=======
   }
 `;
 const StyledResetButton = styled.div`
@@ -65,6 +235,7 @@ const StyledResetButton = styled.div`
   width: 100px;
   height: 30px;
   margin: 30px;
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   color: white;
   text-align: center;
   font-size: 15px;
@@ -73,10 +244,18 @@ const StyledResetButton = styled.div`
   border-radius: 5px;
   &:hover {
     background-color: #489db5;
+<<<<<<< HEAD
+    transition: all 0.3s;
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 
   &:active {
     background-color: #357a92;
+<<<<<<< HEAD
+    transition: all 0.3s;
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   }
 `;
 const StyledGridContainer = styled.div`
@@ -105,6 +284,10 @@ const StyledDroppableContainer = styled.div`
 const StyledPadding = styled.div`
   padding: 24px;
 `;
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
 interface TabPanelProps {
   value: number;
   index: number;
@@ -150,6 +333,8 @@ export default function DragDrop({
     etcBlock: [],
   });
 
+<<<<<<< HEAD
+=======
   console.log(formDataSet);
 
   const handleRegisterTemplate = () => {
@@ -163,6 +348,7 @@ export default function DragDrop({
       });
   };
 
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   const resetBlocks = () => {
     const updatedBeforeBlocks = blocks["before"].map((item) => ({
       ...item,
@@ -182,7 +368,11 @@ export default function DragDrop({
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+<<<<<<< HEAD
+  console.log(formDataSet);
+=======
   console.log(selectedBlocks);
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   const toggleSelect = (clickedBlock: Block) => {
     // 무조건 before 상태일 때만 선택 가능
     // after 상태일 때 선택 불가(버튼으로 삭제 가능하게)
@@ -259,7 +449,11 @@ export default function DragDrop({
   useEffect(() => {
     setSelectedBlocks(blocks["after"]);
   }, [blocks]);
+<<<<<<< HEAD
+  console.log(selectedBlocks + "유후");
+=======
 
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   useEffect(() => {
     const animation = requestAnimationFrame(() => setEnabled(true));
 
@@ -292,7 +486,11 @@ export default function DragDrop({
     setBlocks({ ...blocks, after: newBlocks });
     //setSelectedBlocks(newBlocks);
   };
+<<<<<<< HEAD
+
+=======
   console.log(formDataSet.defaultBlock);
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
   return (
     <div className="p-4">
       {/* <div className="mb-2">
@@ -423,14 +621,31 @@ export default function DragDrop({
                 display: "flex",
                 justifyContent: "center",
                 fontWeight: "bold",
+<<<<<<< HEAD
+                fontSize: "28px",
+              }}
+            >
+              개인정보 제공 및 활용 동의서
+=======
                 fontSize: "25px",
               }}
             >
               작성된 동의서
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
             </Typography>
 
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
               <div>
+<<<<<<< HEAD
+                <StyledmodalBar>
+                  <CustomSign
+                    selectedBlocks={selectedBlocks}
+                    formDataSet={formDataSet}
+                    setFormDataSet={setFormDataSet}
+                  />
+                </StyledmodalBar>
+              </div>
+=======
                 <form>
                   <div className={""}>
                     <tr>
@@ -452,6 +667,7 @@ export default function DragDrop({
               >
                 Submit Template
               </button>
+>>>>>>> 9c4948f0166c239a3c40e11c529dec491ba41cfe
             </Typography>
           </Box>
         </Modal>
