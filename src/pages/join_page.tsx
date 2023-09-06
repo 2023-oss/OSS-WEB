@@ -221,7 +221,7 @@ export default function JoinPage() {
             <div className={"name"}>비밀번호</div>
             <div className={"content"}>
               <input
-                type="text"
+                type="password"
                 placeholder="8~20자의 숫자, 특수문자, 영문자만 사용 가능합니다"
                 value={pw}
                 onChange={handlePwChange}
@@ -259,9 +259,16 @@ export default function JoinPage() {
                   label="Type"
                   onChange={handleCmpTypeChange}
                 >
-                  <MenuItem value="레저">레저</MenuItem>
-                  <MenuItem value="산악등반">산악등반</MenuItem>
-                  <MenuItem value="수명">수영</MenuItem>
+                  <MenuItem value="클라이밍">클라이밍</MenuItem>
+                  <MenuItem value="스쿠버 다이빙">스쿠버 다이빙</MenuItem>
+                  <MenuItem value="캠프 참가">캠프 참가</MenuItem>
+                  <MenuItem value="승마 학교">승마 학교</MenuItem>
+                  <MenuItem value="의료 서비스">의료 서비스</MenuItem>
+                  <MenuItem value="부동산 임대">부동산 임대</MenuItem>
+                  <MenuItem value="결혼식장 이용">결혼식장 이용</MenuItem>
+                  <MenuItem value="자녀 학교 여행">자녀 학교 여행</MenuItem>
+                  <MenuItem value="예술 작품 전시">예술 작품 전시</MenuItem>
+                  <MenuItem value="골프 클럽 멤버십">골프 클럽 멤버십</MenuItem>
                 </Select>
               </FormControl>
               <div className={"typeFont"}>
@@ -290,7 +297,7 @@ export default function JoinPage() {
 
       <div className={"joinCompo"}>
         <div className={"joinBar"}>
-          <div className={"name"}>기업명</div>
+          <div className={"name"}>기업 이미지</div>
           <div className={"content"}>
             <input type="file" onChange={handleFileChange} accept="image/*" />
           </div>

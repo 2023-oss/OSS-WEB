@@ -57,7 +57,6 @@ export const identify = async ({
     return response.data;
   } catch (error) {
     console.error("Error in identify:", error);
-    // throw error; // 호출자에게 예외 다시 던지기
   }
 };
 
@@ -111,3 +110,6 @@ export const viewForms = (templateId: number, page: number) =>
 
 export const searchForms = (templateId: number, page: number, vpId: string) =>
   api.get(`/form/viewAll/${templateId}?page=${page}&search=${vpId}`);
+
+export const searchFormsAll = (templateId: number) =>
+  api.get(`/form/viewAll/${templateId}?page=1&search=`);

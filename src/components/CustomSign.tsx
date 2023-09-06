@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { styled } from "styled-components";
 import { registerTemplate } from "../lib/api";
 import React from "react";
+import { searchForms } from "../lib/api";
 interface SelectedBlockProps extends React.ComponentPropsWithRef<"div"> {
   selectedBlocks: Block[];
   formDataSet: {
@@ -128,7 +129,7 @@ export default function CustomSign(props: SelectedBlockProps) {
   console.log(paymentHTML);
   useEffect(() => {
     // Get the current date and format it as a string
-    const formattedDate = dayjs().format("MMMM D, YYYY"); // Adjust the date format as needed
+    const formattedDate = dayjs().format("YYYY M월 DD일"); // Adjust the date format as needed
     setCurrentDate(formattedDate);
   }, []);
   const handleRegisterTemplate = () => {
@@ -203,10 +204,21 @@ export default function CustomSign(props: SelectedBlockProps) {
         </div>
       )}
       <div className={"writeDate"}>{currentDate}</div>
-      <div className={"SignTab"}>
+      <div className={"agree"} style={{ fontWeight: "bold", fontSize: "20px" }}>
+        모두 동의합니다
+        <input
+          type="checkbox"
+          style={{
+            width: "1.5rem",
+            height: "1rem",
+            border: "1.5px solid gainsboro",
+          }}
+        ></input>
+      </div>
+      {/* <div className={"SignTab"}>
         <h1>서명</h1>
         <div className={"Tab"}></div>
-      </div>
+      </div> */}
       <StyledButton2 onClick={handleRegisterTemplate}>
         Submit Template
       </StyledButton2>

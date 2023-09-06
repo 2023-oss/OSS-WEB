@@ -78,7 +78,10 @@ const StyledmodalBar = styled.div`
 
   .defaultContent {
     background-color: white;
-    padding: 5px;
+    padding: 30px;
+    margin-left: 300px;
+    font-weight: bold;
+    font-size: 20px;
   }
   .personalinfoRender {
     display: flex;
@@ -162,6 +165,10 @@ const StyledmodalBar = styled.div`
     box-shadow: 2px;
     border: 1px solid #000;
     height: 200px;
+  }
+  .writeDate {
+    font-size: 24px;
+    font-weight: bold;
   }
 `;
 const style = {

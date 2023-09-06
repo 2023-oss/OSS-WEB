@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Wrapper from "./Wrapper";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 import { Form } from "../pages/edit_document_page";
 
 const StyledDocumentList = styled.div`
@@ -56,7 +56,9 @@ export default function DocumentList({ forms }: { forms: Form[] }) {
               <td>{getDate(form.createdDate)}</td>
               <td>{form.vpId}</td>
               <td>
-                <img src={"/icon/file.svg"} alt={"file"} />
+                <Link to={`/custom/${form.id}`}>
+                  <img src={"/icon/file.svg"} alt={"file"} />
+                </Link>
               </td>
               <br />
             </tr>
