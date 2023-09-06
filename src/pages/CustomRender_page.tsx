@@ -174,7 +174,7 @@ export default function CustomRenderPage() {
   const params = useParams();
 
   const getData = async () => {
-    searchFormsAll(6).then((res) => {
+    searchFormsAll().then((res) => {
       console.log("res : ", res.data);
       console.log(res.data.forms, "이양");
 
