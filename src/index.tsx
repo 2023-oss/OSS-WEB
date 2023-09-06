@@ -14,6 +14,8 @@ import EditDocumentPage from "./pages/edit_document_page";
 import SortablePage from "./pages/sortable";
 import JoinPage from "./pages/join_page";
 import FindIdPage from "./pages/findId_page";
+import CustomSign from "./components/CustomSign";
+import CustomRenderPage from "./pages/CustomRender_page";
 const router = createBrowserRouter([
   /**
    * 동의서를 목록
@@ -54,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "/findId",
     element: <FindIdPage />,
+  },
+  {
+    path: "/custom/:id/",
+    element: <CustomRenderPage />,
   },
 ]);
 
