@@ -161,7 +161,7 @@ export default function LoginPage() {
         </div>
         <div className={"input-box"}>
           <input
-            type="text"
+            type="password"
             placeholder="비밀번호"
             onChange={handlePasswordChange}
             value={password}
