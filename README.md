@@ -18,8 +18,11 @@ OSS WEB은 블록체인 기반 동의서 제작에서 양식 제작부분을 담
  **1.** 드래그 앤 드롭으로 블럭들을 옮기는 기능
  <br/>
  **2.** 블럭들을 클릭하면 한꺼번에 옮기는 기능
+ <br/>
  **3.** 리셋 버튼을 누르면 After랑 맨 우측 화면 리셋 기능
+ <br/>
  **4.** Register Template 을 누르면 동의서 양식 렌더링 기능
+ <br/>
  **5.** Submit Template 을 누르면 동의서 서버에 제출 기능
  
 <p align="center"> <img src="https://github.com/2023-oss/OSS-WEB/assets/102888719/e654908c-db0a-4a38-a87f-b1d91b05bc08"> </p>
