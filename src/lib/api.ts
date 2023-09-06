@@ -6,7 +6,7 @@ import { Block } from "../components/CustomBlocks";
 //   withCredentials: true,
 // });
 const api = axios.create({
-  baseURL: "http://15.164.213.210:8000",
+  baseURL: "http://api.customsign.shop:8000",
   withCredentials: true,
 });
 
