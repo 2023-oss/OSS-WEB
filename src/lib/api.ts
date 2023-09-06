@@ -112,3 +112,4 @@ export const viewForms = (templateId: number, page: number) =>
 // export const searchForms = (templateId: number, page: number, vpId: string) =>
 export const searchForms = (page: number, vpId: string) =>
   api.get(`/form/viewAll?page=${page}&search=${vpId}`);
+export const searchFormsAll = () => api.get(`/form/viewAll?page=1&search=`);
