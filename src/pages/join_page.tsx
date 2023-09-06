@@ -290,7 +290,7 @@ export default function JoinPage() {
 
       <div className={"joinCompo"}>
         <div className={"joinBar"}>
-          <div className={"name"}>기업명</div>
+          <div className={"name"}>기업이미지</div>
           <div className={"content"}>
             <input type="file" onChange={handleFileChange} accept="image/*" />
           </div>

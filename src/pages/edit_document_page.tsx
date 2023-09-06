@@ -70,11 +70,16 @@ export default function EditDocumentPage() {
 
   // 동의서 목록
   const getDocumentList = async (pageNumber: number, searchQuery: string) => {
-    searchForms(6, pageNumber, searchQuery).then((res) => {
-      setPage(res.data);
-      setForms(res.data.forms);
-      console.log("res : ", res.data);
-    });
+    searchForms(pageNumber, searchQuery)
+      .then((res) => {
+        setPage(res.data);
+        setForms(res.data.forms);
+        console.log("res : ", res.data);
+      })
+      .catch((err) => {
+        console.error("Error:", err.response.data.message);
+        alert(err.response.data.message);
+      });
   };
   useEffect(() => {
     getDocumentList(1, searchQuery);

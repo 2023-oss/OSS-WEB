@@ -107,7 +107,8 @@ export const registerForm = (data: FormData, templateId: number) =>
   api.post(`/form/make/${templateId}`, data);
 
 export const viewForms = (templateId: number, page: number) =>
-  api.get(`/form/viewAll/${templateId}?page=${page}`);
+  api.get(`/form/viewAll?page=${page}`);
 
-export const searchForms = (templateId: number, page: number, vpId: string) =>
-  api.get(`/form/viewAll/${templateId}?page=${page}&search=${vpId}`);
+// export const searchForms = (templateId: number, page: number, vpId: string) =>
+export const searchForms = (page: number, vpId: string) =>
+  api.get(`/form/viewAll?page=${page}&search=${vpId}`);

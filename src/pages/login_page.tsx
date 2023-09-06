@@ -99,7 +99,8 @@ export default function LoginPage() {
         navigate("/");
       })
       .catch((err) => {
-        console.error("Error:", err);
+        console.error("Error:", err.response.data.message);
+        alert(err.response.data.message);
       });
   };
   const handleSubmit = async (e: any) => {
