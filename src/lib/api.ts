@@ -6,6 +6,7 @@ import { Block } from "../components/CustomBlocks";
 //   withCredentials: true,
 // });
 const api = axios.create({
+  //baseURL: "http://15.164.213.210:8000",
   baseURL: "http://api.customsign.shop:8000",
   withCredentials: true,
 });
@@ -112,5 +113,4 @@ export const viewForms = (templateId: number, page: number) =>
 // export const searchForms = (templateId: number, page: number, vpId: string) =>
 export const searchForms = (page: number, vpId: string) =>
   api.get(`/form/viewAll?page=${page}&search=${vpId}`);
-
 export const searchFormsAll = () => api.get(`/form/viewAll?page=1&search=`);
