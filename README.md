@@ -1,9 +1,5 @@
 
 
-
-
-
-
 ## OSS_WEB
 OSS WEB은 블록체인 기반 동의서 제작에서 양식 제작부분을 담당한다 개발에서 가장 신경썼던 건 **어떻게 사용자가 편하게 동의서 양식을 제작할 수 있는지** 였다. 기획 단계에서 DND 오픈소스를 이용해 드래그 기능으로 사용자가 편하게 블록들을 옮기는 게 좋겠다고 의견이 나왔고 그 의견들을 토대로 DND 오픈소스를 최종적으로 beautiful-dnd 오픈소스를 사용하게 되었다. 
 ## 목적
@@ -21,11 +17,11 @@ OSS WEB은 블록체인 기반 동의서 제작에서 양식 제작부분을 담
  **4.** Register Template 을 누르면 동의서 양식 렌더링 기능
  **5.** Submit Template 을 누르면 동의서 서버에 제출 기능
  
-<p align="center"> <img src="https://github.com/2023-oss/OSS-ISSUER/assets/102888719/9225ad8c-f325-4ff5-88e1-1c62843df83f"> </p>
+<p align="center"> <img src="https://github.com/2023-oss/OSS-WEB/assets/102888719/8860667d-b3be-4039-a3b8-45e3259ad3ac"> </p>
 
 **로그인 화면**
 
-<p align="center"> <img src="https://github.com/2023-oss/OSS-ISSUER/assets/102888719/6ee3d9a1-64c4-4007-9619-a076db6b7e26"> </p>
+<p align="center"> <img src="https://github.com/2023-oss/OSS-WEB/assets/102888719/8860667d-b3be-4039-a3b8-45e3259ad3ac"> </p>
 
 **회원가입 화면**
 
