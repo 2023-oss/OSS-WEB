@@ -27,7 +27,7 @@ OSS WEB은 블록체인 기반 동의서 제작에서 양식 제작부분을 담
   <br/>
  **5.** Submit Template 을 누르면 동의서 서버에 제출 기능
  
-<p align="center"> <img src="https://github.com/2023-oss/OSS-WEB/assets/102888719/d2dacbb2-084b-4d44-bd72-6f8136cb9b2b"> </p>
+<p align="center"> <img src="[https://github.com/2023-oss/OSS-WEB/assets/102888719/d2dacbb2-084b-4d44-bd72-6f8136cb9b2b](https://github.com/2023-oss/OSS-WEB/assets/102888719/c2b20588-9d98-4750-b17e-77ded74709ab)"> </p>
 
 **1.로그인 화면**
  <br/>
