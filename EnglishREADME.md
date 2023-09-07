@@ -4,7 +4,7 @@
 
 
 
-[Korean Document](https://github.com/2023-oss/OSS-WEB/blob/main/README.md)
+[한국어 버전](https://github.com/2023-oss/OSS-WEB/blob/main/README.md)
 
 ## OSS_WEB
 OSS WEB is in charge of producing forms in blockchain-based consent form. **The most important thing in development was how users could easily produce consent forms.** In the planning stage, there was an opinion that it would be better for users to move blocks comfortably with a drag function using DND open source, and based on those opinions, DND open source was finally adopted
