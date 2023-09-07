@@ -7,27 +7,26 @@
 
 
 ## OSS_WEB
-OSS WEB은 블록체인 기반 동의서 제작에서 양식 제작부분을 담당한다 개발에서 가장 신경썼던 건 **어떻게 사용자가 편하게 동의서 양식을 제작할 수 있는지** 였다. 기획 단계에서 DND 오픈소스를 이용해 드래그 기능으로 사용자가 편하게 블록들을 옮기는 게 좋겠다고 의견이 나왔고 그 의견들을 토대로 DND 오픈소스를 최종적으로 beautiful-dnd 오픈소스를 사용하게 되었다. 
-## 목적
-동의서가 필요한 기관들은 필요한 양식들을 하나하나 찾아봐야 한다. 또 기관들은 어떻게 책임조항, 안전수칙 이러한 것들을 배치할지도 고민이다. 
-이러한 고려사항들을 해결하고 싶었고 그 해결방안으로 **카테고리별로 각 조항들을 담고 있는 블록, 드래그 기능을 이용한 블록배치, 그리고 프리뷰 화면**을 구현해보았다. 
-## 주요 기능
+OSS WEB is in charge of producing forms in blockchain-based consent form. **The most important thing in development was how users could easily produce consent forms.** In the planning stage, there was an opinion that it would be better for users to move blocks comfortably with a drag function using DND open source, and based on those opinions, DND open source was finally adopted
+## Why We Made?
+Institutions that need consent should look for the necessary forms one by one. Institutions are also considering how to deploy responsibility clauses and safety rules. I wanted to solve these considerations, and as a solution, I made three things which is **“a block containing each provision for each category”, a block layout using a drag function” ,“a preview screen”.**
+## Functions
 
 
  <p align="center"> <img src="https://github.com/2023-oss/OSS-ISSUER/assets/102888719/6828fb42-856e-4f2a-8ae7-d70669edac10"> </p>
  
 
- **1.** 드래그 앤 드롭으로 블럭들을 옮기는 기능
+ **1.** The function to move blocks with drag and drop
  <br/>
- **2.** 블럭들을 클릭하면 한꺼번에 옮기는 기능
+ **2.** Click Blocks to move at once
   <br/>
- **3.** 리셋 버튼을 누르면 After랑 맨 우측 화면 리셋 기능
+ **3.** reset button which operates in After and on the far right screen
   <br/>
- **4.** Register Template 을 누르면 동의서 양식 렌더링 기능
+ **4.** Press Register Template Button and it renders Preview
   <br/>
- **5.** Submit Template 을 누르면 동의서 서버에 제출 기능
+ **5.** Press Submit Template and it submits to Server
 
- ## 페이지들
+ ## Pages
 <p>
 <img src="https://github.com/2023-oss/OSS-WEB/assets/102888719/6a0ad2c5-1476-43f1-9a90-a124aab8376a">
 </p>
@@ -37,9 +36,9 @@ OSS WEB은 블록체인 기반 동의서 제작에서 양식 제작부분을 담
 
 
 
-## 설치 환경
+## Installation environment
 
-아래와 같은 환경을 권장합니다.
+The following environments are recommended.
 
 | service           | version  |
 | ----------------- | -------- |
